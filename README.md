@@ -22,6 +22,7 @@ This repository gives an exact five-dimensional counterexample to the conjecture
 - [Independent verification summary](results/I05_lyons_counterexample/verification_summary.md)
 - [中文：问题的提出、发展、作者与本项目贡献](results/I05_lyons_counterexample/history_zh.md)
 - [Primary-source index and direct PDF links](results/I05_lyons_counterexample/sources/README.md)
+- [Projection-boundary generalization and second proof mechanism](results/I05_lyons_counterexample/projection_boundary_extension/README.md)
 
 The result does not settle the real-symmetric-only restriction, the minimum possible counterexample dimension, or the separate stationary Toeplitz entropy-rate conjecture.
 

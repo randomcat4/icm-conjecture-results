@@ -10,6 +10,11 @@ Here (K) is real symmetric, (A=iB) is purely imaginary Hermitian of rank four, a
 
 For a detailed Chinese account of the conjecture's 2003 origin, its relation to the Lyons--Steif stationary conjecture, its 2014 ICM restatement, later partial results, author profiles, and the exact scope of this project, see [history_zh.md](history_zh.md). A compact index of primary sources with direct PDF links is in [sources/README.md](sources/README.md).
 
+The [projection-boundary extension](projection_boundary_extension/README.md) supplies a second,
+local-curvature proof mechanism together with broader structural results: real concavity in inward
+neighbourhoods of connected projections, an exact one-parameter real/complex separation family,
+and a mixed fourth-order obstruction for independent real blocks.
+
 ## Reproduce the exact check
 
 Only Python's standard library is required. From this directory, run:
@@ -55,3 +60,6 @@ No license or DOI is asserted by this package.
 - [`scripts/verify_exact.py`](scripts/verify_exact.py): standard-library exact checker.
 - [`verification_summary.md`](verification_summary.md): public-safe verification coverage and limitations.
 - [`reproduction/`](reproduction/): outputs from the public clean run and paper build.
+- [`projection_boundary_extension/`](projection_boundary_extension/): the generalized
+  projection-boundary proof, exact certificates, and a careful account of the quantities
+  \(\Lambda_P(D)\) and \(\ell(P,N,B)\).
