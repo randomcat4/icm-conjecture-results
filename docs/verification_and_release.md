@@ -1,8 +1,8 @@
 # Verification and release policy
 
-The current authorization covers the empty repository framework only. It does not authorize synchronizing private research material or publishing future results.
+The I05 Lyons counterexample package has specific public-release authorization. That authorization does not extend to any other research result or to synchronizing private research material.
 
-A proposed release must satisfy all of the following before the user is asked to approve the concrete package:
+A proposed additional release must satisfy all of the following before the user is asked to approve the concrete package:
 
 1. Independent status, semantics, and value audits identify the original question, check later work, establish the exact intended statement, and explain the substantive contribution. Failure to find a prior result is not proof that a problem remains open or that a result is new.
 2. A complete proof or counterexample covers the declared statement. Fresh independent reviewers inspect a fixed version in read-only isolation; a complete result on a genuinely open main problem requires a second independent mathematical review. Essential computation has a rigorous, reproducible certificate and an independent check.

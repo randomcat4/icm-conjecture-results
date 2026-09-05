@@ -1,13 +1,12 @@
 # ICM Conjecture Results
 
-This repository is an empty public framework for sharing independently verified research results related to questions from International Congress of Mathematicians proceedings.
+This public repository shares independently verified research results related to questions from International Congress of Mathematicians proceedings.
 
-**No research results have been released here.** Creating this public framework does not authorize publication of any future research. Private candidates, proofs, drafts, audit notes, and source datasets are not part of this repository.
+Published results: **1**.
 
-Only a complete result that passes the required independent mathematical and manuscript checks may be considered for release. The user must then explicitly authorize the specific release package. Verification alone is not publication permission, a claim of novelty, or an authorship decision.
-
-- [Result index and entry template](results/README.md)
+- [I05: an exact five-dimensional counterexample to Lyons's Conjecture 2.6](results/I05_lyons_counterexample/README.md)
+- [Result index](results/README.md)
 - [Verification and release policy](docs/verification_and_release.md)
 - [Source attribution principles](docs/source_attribution.md)
 
-The machine-readable [result index](results/index.jsonl) is intentionally empty. The repository is an independent project and does not imply endorsement by the ICM or its organizers.
+Each result states its precise mathematical scope, reproducibility coverage, and unresolved limits. A verification verdict is not a claim of absolute novelty, priority, authorship, or endorsement by the ICM or its organizers.

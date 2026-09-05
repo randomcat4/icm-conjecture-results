@@ -1,0 +1,328 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=30mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs,longtable}
+\usepackage[hidelinks]{hyperref}
+\usepackage{microtype}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newcommand{\C}{\mathbb C}
+\newcommand{\R}{\mathbb R}
+\newcommand{\PP}{\mathbb P}
+\newcommand{\cE}{\mathcal E}
+\newcommand{\tr}{\operatorname{tr}}
+
+\title{An Exact Five-Dimensional Counterexample to Concavity of Determinantal-Process Entropy}
+\author{Author placeholder}
+\date{Internal draft --- 5 September 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+For a determinantal probability measure on a finite labelled set, Russell Lyons
+conjectured that the Shannon entropy of the full subset-valued law is concave in
+the positive-contraction kernel.  We give an exact counterexample on five
+coordinates over a complex Hilbert space.  The midpoint is a rational real
+symmetric kernel, the chord has a rational purely imaginary Hermitian direction,
+and every claim is reduced to finite rational arithmetic.  Sylvester certificates
+put the midpoint and both endpoints strictly between zero and the identity.  A
+table gives all 32 atom probabilities at the midpoint and endpoints; every entry
+is positive, every distribution sums to one, and the two endpoint distributions
+agree entry by entry.  Directed rational enclosures for logarithms prove
+\[
+ H(K+hA)-H(K)>10^{-13}
+ \quad\text{and}\quad
+ \frac1{200}<D^2H(K)[A,A]<\frac1{190}.
+\]
+Thus the complex-Hilbert-space version of the conjecture is false.  The
+real-symmetric restriction and the minimum possible counterexample dimension
+remain open.
+\end{abstract}
+
+\paragraph{Draft status.}
+This is a private mathematical note awaiting an independent paper-level review.
+All load-bearing prose and proof organization introduced here are marked
+\texttt{NEW\_REWRITE\_REQUIRES\_VERIFICATION} in \texttt{source\_map.md}.
+
+\section{The conjecture and the exact conclusion}
+
+Let $E=[n]$ be a labelled set and let $K$ be a Hermitian operator on
+$\ell^2(E;\C)$ with $0\preceq K\preceq I$.  The determinantal probability
+measure $\PP^K$ is characterized by
+\begin{equation}\label{eq:inclusion}
+ \PP^K(T\subseteq X)=\det K[T]\qquad(T\subseteq E),
+\end{equation}
+where $K[T]$ is the principal submatrix on the fixed coordinates $T$.  Write
+$p_K(S)=\PP^K(X=S)$ for its $2^n$ atom probabilities and
+\begin{equation}\label{eq:entropy}
+ H(K)=-\sum_{S\subseteq E}p_K(S)\log p_K(S),
+ \qquad 0\log0:=0.
+\end{equation}
+Conjecture~2.6 of Lyons~\cite{Lyons2014} asserts midpoint concavity of this
+quantity on the convex set of positive contractions.  The source explicitly
+allows real or complex Hilbert spaces, defines a positive contraction to be
+self-adjoint with $0\preceq K\preceq I$, and uses the entropy of the complete
+subset-valued distribution.  These points occur, respectively, on printed pages
+138, 140, and 141; the coordinate DPP definition begins on printed page 137.
+
+\begin{theorem}\label{thm:main}
+On $E=[5]$, there exist strict positive contractions $K-hA$ and $K+hA$ on
+$\ell^2(E;\C)$, with midpoint $K$, such that
+\[
+ H(K)<\frac{H(K-hA)+H(K+hA)}2.
+\]
+More precisely, the matrices in \eqref{eq:K}--\eqref{eq:B} with
+$h=1/100000$ satisfy
+\[
+ H(K+hA)-H(K)>10^{-13},
+ \qquad
+ \frac1{200}<D^2H(K)[A,A]<\frac1{190}.
+\]
+Consequently the full complex-Hermitian version of Lyons's entropy-concavity
+conjecture is false.
+\end{theorem}
+
+The assertion concerns the labelled-coordinate entropy in \eqref{eq:entropy}.
+No invariance under an arbitrary unitary change of basis is used or asserted.
+
+\section{The rational chord}
+
+Define
+\begin{equation}\label{eq:K}
+K=\frac1{10000}
+\begin{pmatrix}
+2719&-3449&1009&-818&-2490\\
+-3449&5840&-2889&-1513&1322\\
+1009&-2889&2148&2505&1101\\
+-818&-1513&2505&4698&3958\\
+-2490&1322&1101&3958&4596
+\end{pmatrix}
+\end{equation}
+and $A=iB$, where
+\begin{equation}\label{eq:B}
+B=\frac1{50}
+\begin{pmatrix}
+0&-3&-13&-16&4\\
+3&0&-4&15&17\\
+13&4&0&6&-15\\
+16&-15&-6&0&1\\
+-4&-17&15&-1&0
+\end{pmatrix},
+\qquad h=\frac1{100000}.
+\end{equation}
+Since $B^T=-B$, the matrix $A=iB$ is Hermitian.  The Pfaffian numerator of
+the leading $4\times4$ block of $50B$ is
+$(-3)(6)-(-13)(15)+(-16)(-4)=241$, so that block has determinant
+$58081/6250000>0$.  An odd-dimensional real antisymmetric matrix has zero
+determinant; hence $\operatorname{rank}A=\operatorname{rank}B=4$.
+
+\section{Strict feasibility by Sylvester's criterion}
+
+\begin{lemma}\label{lem:feasible}
+The three kernels $K$, $K-hA$, and $K+hA$ satisfy $0<K_t<I$ strictly.
+\end{lemma}
+
+\begin{proof}
+For each row below, the five entries are the leading principal minors in orders
+$1,\ldots,5$:
+\begin{align*}
+K:\;&
+\frac{2719}{10^4},\;
+\frac{3983359}{10^8},\;
+\frac{24692191}{10^{12}},\\[-2pt]
+&\frac{3908717}{5\cdot10^{14}},\;
+\frac{118205061}{10^{20}};\\
+I-K:\;&
+\frac{7281}{10^4},\;
+\frac{18393359}{10^8},\;
+\frac{59312197809}{10^{12}},\\[-2pt]
+&\frac{35054548217}{5\cdot10^{14}},\;
+\frac{1709337154939}{10^{20}};\\
+K+hA:\;&
+\frac{2719}{10^4},\;
+\frac{995839749991}{25\cdot10^{12}},\;
+\frac{123460921839}{5\cdot10^{15}},\\[-2pt]
+&\frac{4883537625128308081}{625\cdot10^{24}},\;
+\frac{7353066474454085031}{625\cdot10^{28}};\\
+I-K-hA:\;&
+\frac{7281}{10^4},\;
+\frac{4598339749991}{25\cdot10^{12}},\;
+\frac{296560989039361}{5\cdot10^{15}},\\[-2pt]
+&\frac{43818177021217628308081}{625\cdot10^{24}},\;
+\frac{106676909868459401834969}{625\cdot10^{28}}.
+\end{align*}
+Every displayed number is a positive rational number, and the imaginary part of
+each determinant is exactly zero.  Sylvester's criterion proves $K>0$, $I-K>0$,
+$K+hA>0$, and $I-K-hA>0$.  Complex conjugation gives
+$K-hA=\overline{K+hA}$ and $I-K+hA=\overline{I-K-hA}$, so their corresponding
+leading principal minors are the same.  Thus both remaining Hermitian matrices
+are positive definite as well.
+\end{proof}
+
+\section{All atom probabilities}
+
+For $S\subseteq[5]$, put $C=S^c$, let $I_C$ denote the diagonal coordinate
+projection onto $C$, and set
+\begin{equation}\label{eq:eventdet}
+ M_S=K-I_C,
+ \qquad
+ p_S(t)=(-1)^{|C|}\det(M_S+t iB).
+\end{equation}
+
+\begin{lemma}\label{lem:eventformula}
+For every real $t$ for which $K+tA$ is a positive contraction,
+$p_S(t)=\PP^{K+tA}(X=S)$.
+\end{lemma}
+
+\begin{proof}
+M\"obius inversion of \eqref{eq:inclusion} gives
+\begin{equation}\label{eq:mobius}
+ \PP^{K+tA}(X=S)=
+ \sum_{T\supseteq S}(-1)^{|T\setminus S|}\det(K+tA)[T].
+\end{equation}
+Expanding $\det(K+tA-I_C)$ by the diagonal entries contributed by $-I_C$
+leaves exactly the same principal minors, with the same signs after multiplication
+by $(-1)^{|C|}$.  This proves \eqref{eq:eventdet}.
+\end{proof}
+
+Table~\ref{tab:events} lists the exact data for all 32 masks; a bit equal to one
+means that the corresponding coordinate belongs to $S$.  All center numerators
+$c_S$ and endpoint numerators $e_S$ are strictly positive, and direct integer
+summation gives
+\begin{equation}\label{eq:sums}
+ \sum_Sc_S=10^{20},
+ \qquad
+ \sum_Se_S=625\cdot10^{28}.
+\end{equation}
+Thus the center and endpoint rows are positive probability distributions and each
+sums exactly to one.  Moreover,
+\[
+ p_S(-h)=\overline{p_S(h)}=p_S(h),
+\]
+because the matrices in \eqref{eq:eventdet} are Hermitian and changing $h$ to
+$-h$ complex-conjugates them.  Hence the two endpoint distributions agree for
+each labelled subset, not merely after a permutation or in aggregate.
+
+\section{The exact logarithm certificates}
+
+We now describe the directed interval calculation used for both strict
+inequalities.  It involves rational arithmetic only.  For a positive rational
+$x$, write uniquely $x=2^k y$ with $1\le y<2$, and put
+$z=(y-1)/(y+1)\in[0,1/3)$.  For $N=80$, define
+\[
+ L_N(y)=2\sum_{m=0}^{N-1}\frac{z^{2m+1}}{2m+1},
+ \qquad
+ R_N(y)=\frac{2z^{2N+1}}{(2N+1)(1-z^2)}.
+\]
+The positive-term expansion of $\operatorname{atanh}z$ gives the rational
+enclosure
+\begin{equation}\label{eq:loginterval}
+ L_N(y)\le\log y\le L_N(y)+R_N(y).
+\end{equation}
+The same formula at $y=2$, $z=1/3$, encloses $\log2$.  Combining the intervals
+for $\log y$ and $k\log2$ uses the lower endpoint of the $\log2$ interval when
+$k\ge0$ and the upper endpoint when $k<0$; the opposite endpoints give the upper
+bound.  Finally, in a sum $\sum_j a_j\log x_j$, the lower bound uses the lower
+logarithm endpoint when $a_j>0$ and the upper endpoint when $a_j<0$.  The upper
+bound uses the reverse choices.  This explicit sign rule is what makes the
+certificates directed.
+
+\subsection{The midpoint Hessian}
+
+Since $M_S$ is real symmetric and $B$ is real antisymmetric,
+$\tr(M_S^{-1}B)=0$.  The determinant derivative formula applied to
+\eqref{eq:eventdet} therefore gives
+\begin{equation}\label{eq:pderivatives}
+ p'_S(0)=0,
+ \qquad
+ p''_S(0)=p_S(0)\tr(M_S^{-1}B M_S^{-1}B).
+\end{equation}
+The last column of Table~\ref{tab:events} lists the numerator $d_S$ of every
+$p''_S(0)$ over the common denominator $312500000000000$.  Exact summation gives
+$\sum_Sp''_S(0)=0$.  Twice differentiating \eqref{eq:entropy}, using
+$p'_S(0)=0$, yields
+\begin{equation}\label{eq:hessianlogs}
+ D^2H(K)[A,A]
+ =-\sum_Sp''_S(0)\log p_S(0)
+ =\sum_Sq_S\log p_S(0),
+ \qquad q_S=-p''_S(0).
+\end{equation}
+Applying the directed rule above to the 32 rational logarithms gives the strict
+rational enclosure
+\begin{equation}\label{eq:hessianinterval}
+ \frac{5205948204140858303}{10^{21}}
+ <D^2H(K)[A,A]<
+ \frac{5205948204140858304}{10^{21}}.
+\end{equation}
+The lower endpoint exceeds $1/200$ by
+$205948204140858303/10^{21}$, while $1/190$ exceeds the upper endpoint by
+$16984126895682691/296875000000000000000$.  Both margins are positive, which
+proves the Hessian claim without using its decimal approximation.
+
+\subsection{The finite chord}
+
+Use the 64 rational logarithmic terms in
+\begin{equation}\label{eq:gaplogs}
+ H(K+hA)-H(K)
+ =-\sum_S p_S(h)\log p_S(h)
+  +\sum_S p_S(0)\log p_S(0).
+\end{equation}
+The probabilities are exactly those in Table~\ref{tab:events}.  Applying
+\eqref{eq:loginterval}, with each coefficient directed according to its sign,
+gives
+\begin{equation}\label{eq:gapinterval}
+ \frac{233555253804221762}{10^{30}}
+ <H(K+hA)-H(K)<
+ \frac{233555253804221763}{10^{30}}.
+\end{equation}
+The lower endpoint exceeds $10^{-13}$ by
+\[
+ \frac{66777626902110881}
+ {500000000000000000000000000000}>0.
+\]
+Because the two endpoint distributions agree term by term,
+$H(K-hA)=H(K+hA)$.  Lemma~\ref{lem:feasible} and
+\eqref{eq:gapinterval} now prove Theorem~\ref{thm:main}.
+
+\section{Scope and compatibility}
+
+The counterexample uses a real symmetric midpoint but a purely imaginary
+rank-four Hermitian direction.  It therefore settles the complex-Hilbert-space
+branch of the original conjecture, whose quantifiers include this chord.  It does
+not settle a separately imposed restriction to real symmetric kernels.  It also
+does not show that five is the least possible counterexample dimension.
+
+This result is compatible with the independently verified fixed-complement-block
+star-fibre theorem.  In that theorem the kernels have the form
+\[
+ \begin{pmatrix}a&v^*\\v&C\end{pmatrix}
+\]
+with the same Hermitian block $C$ along the fibre, so a difference within one
+fibre is supported on one coordinate star and has rank at most two.  The present
+direction has rank four and is not a difference inside such a fibre.  Coordinate
+dependence also prevents an arbitrary unitary change of basis from turning this
+observation into a claim about the same entropy functional.
+
+The exact certificate proves a counterexample, but it does not establish absolute
+priority or novelty.  The source audit found no earlier public proof or
+counterexample in its bounded search as of 5 September 2026; that limited result
+is not a systematic or exhaustive priority determination.
+
+\section*{Data availability}
+
+The directory \texttt{certificates/} contains the two frozen 32-row rational
+tables and their JSON summaries.  Table~\ref{tab:events} is a typeset projection
+of those fixed tables, not a floating-point recomputation.
+
+\appendix
+\section{The 32 exact atoms and second derivatives}
+\begingroup\scriptsize
+\input{certificates/event_table.tex}
+\endgroup
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}
