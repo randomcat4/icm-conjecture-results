@@ -13,15 +13,15 @@ $$
 确定。这里 $X$ 是取值于 $2^E$ 的随机子集，$Q[A]$ 是由标号坐标 $A$ 取出的主子矩阵。完整分布的 Shannon 熵为
 
 $$
-\operatorname{Ent}(Q)
+\mathrm{Ent}(Q)
 =-\sum_{A\subseteq E}\mathbb P^Q(X=A)\log \mathbb P^Q(X=A).
 $$
 
 Lyons 猜想：对任意两个正压缩 $Q_1,Q_2$，
 
 $$
-\operatorname{Ent}\!\left(\frac{Q_1+Q_2}{2}\right)
-\geq \frac{\operatorname{Ent}(Q_1)+\operatorname{Ent}(Q_2)}2.
+\mathrm{Ent}\!\left(\frac{Q_1+Q_2}{2}\right)
+\geq \frac{\mathrm{Ent}(Q_1)+\mathrm{Ent}(Q_2)}2.
 $$
 
 中点形式等价于通常的线段凹性。这里研究的是 $2^{|E|}$ 个标号子集的完整概率分布之熵，不是点数 $|X|$ 的熵、核的特征值熵、von Neumann 熵，也不是无限平稳过程的每格熵率。
@@ -91,7 +91,7 @@ Yuzhou Gu 的 MIT 6.881 课程项目报告 *Entropy of Determinantal Point Proce
 
 1. 点数随机变量 $|X(K)|$ 的熵关于 $K$ 凹；
 2. 一条线段的一个端点为零核时，完整 DPP 熵满足所需凹性；
-3. 当 $\operatorname{rank}(K_1-K_2)=1$ 时，完整 DPP 熵沿该线段凹。
+3. 当 $\mathrm{rank}(K_1-K_2)=1$ 时，完整 DPP 熵沿该线段凹。
 
 第一条处理的是点数熵而非完整子集熵；后两条是真正的完整熵特殊情形。它们与本仓库的反例兼容，因为这里的反例方向是秩四的纯虚 Hermitian 方向。该报告是课程项目稿，不是经同行评议的期刊论文；我们没有找到由它继续发展出的公开专题论文系列。
 
@@ -115,7 +115,7 @@ $$
 
 1. Sylvester 判据以正有理数证明中心和端点严格位于 $0$ 与 $I$ 之间；
 2. 逐项精确计算五个标号坐标的全部 32 个事件概率，证明每项为正、总和为一，且两个端点逐事件相等；
-3. 用带显式几何余项的 80 项 $\operatorname{atanh}$ 展开给出有向有理对数区间；
+3. 用带显式几何余项的 80 项 $\mathrm{atanh}$ 展开给出有向有理对数区间；
 4. 由此严格证明
 
    $$
@@ -144,6 +144,8 @@ $$
 
 **Russell Lyons** 是美国概率论学者，现任 Indiana University Bloomington 的 James H. Rudy Professor of Mathematics，并兼任统计学教授。他的研究横跨图上的概率、组合学、统计力学、遍历论、调和分析和几何群论。有限 DPP 熵凹性猜想由他在 2003 年提出，并在 2014 年 ICM 邀请报告中重述。[Indiana University 官方简介](https://math.indiana.edu/about/faculty/lyons-russell.html)
 
+这位原作者具有很强的顶级期刊和学术服务履历。他的论文 *Fourier–Stieltjes Coefficients and Asymptotic Distribution Modulo 1* 发表于 *Annals of Mathematics* 122 (1985), 155–170；提出本猜想的 2003 年 DPP 论文自身发表于 *Publications Mathématiques de l'IHÉS*。他还是 2014 年 ICM 邀请报告人，并自 2022 年起担任 *Annals of Mathematics* 副编辑。[Annals 1985 年卷页](https://annals.math.princeton.edu/1985/122-1)；[Lyons 官方履历](https://rdlyons.pages.iu.edu/pdf/cv-web.pdf)
+
 **Jeffrey E. Steif** 是 Chalmers University of Technology 数学科学系分析与概率论教授，也是瑞典皇家科学院数学类成员。他的研究包括概率论、渗流、噪声敏感性、随机过程和遍历性质。他与 Lyons 共同提出的是相关的无限平稳 DPP 熵率猜想。[Chalmers 官方简介](https://www.chalmers.se/en/persons/steif/)；[瑞典皇家科学院简介](https://www.kva.se/en/contact/jeffrey-steif-2/)
 
 **Yuzhou Gu** 的研究领域包括信息论、统计、概率和计算机科学。他于 2023 年获 MIT EECS 博士学位，曾任 Institute for Advanced Study 数学学院成员。2020 年还是 MIT 学生时，他完成了上述三个部分结果。[IAS 简介](https://www.ias.edu/scholars/yuzhou-gu)；[个人主页](https://sevenkplus.com/)
@@ -154,6 +156,6 @@ $$
 
 截至 2026 年 9 月 5 日，本项目以猜想编号、原句、作者名以及“DPP entropy concavity”等等价表达做了有限检索。可见记录显示：该问题被 DPP 概率论和机器学习文献注意过，Gu 也给出了有内容的部分结果，但没有出现多篇彼此推进的证明论文或稳定研究群体。更合适的描述是“长期处于边缘、只有零星实质尝试的有趣猜想”，而不是“许多人围攻后遗留的著名难题”。
 
-检索不到不等于不存在。私人通信、讨论班、未公开笔记和未发表失败尝试不在本判断范围内；本项目也不据此宣称绝对首发。
+**尽我们所知，在本项目结果形成以前，公开文献中没有该有限完整熵猜想的一般证明或严格反例。** 这一表述限于我们查到的公开记录；私人通信、讨论班、未公开笔记和未发表尝试不在可核实范围内，因此这里不作不受限定的绝对首发声明。
 
 所有来源的集中索引和直接 PDF 链接见 [sources/README.md](sources/README.md)。
