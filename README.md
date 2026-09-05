@@ -4,7 +4,7 @@ This public repository shares independently verified research results related to
 
 Published results: **1**.
 
-- [I05: an exact five-dimensional counterexample to Lyons's Conjecture 2.6](results/I05_lyons_counterexample/README.md)
+- [I05: an exact five-dimensional counterexample to Lyons's Conjecture 2.6](results/I05_lyons_counterexample/README.md) ([中文问题史与项目贡献](results/I05_lyons_counterexample/history_zh.md), [原始 PDF 链接](results/I05_lyons_counterexample/sources/README.md))
 - [Result index](results/README.md)
 - [Verification and release policy](docs/verification_and_release.md)
 - [Source attribution principles](docs/source_attribution.md)

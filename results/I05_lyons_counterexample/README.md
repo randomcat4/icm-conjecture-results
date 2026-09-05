@@ -8,6 +8,8 @@ H(K)<\frac{H(K-hA)+H(K+hA)}2.
 
 Here (K) is real symmetric, (A=iB) is purely imaginary Hermitian of rank four, and (h=1/100000). All 32 atom probabilities are exact positive rationals, each distribution sums to one, and the two endpoint distributions agree atom by atom. Directed rational logarithm bounds certify both the strict finite-chord entropy violation and a strictly positive Hessian direction.
 
+For a detailed Chinese account of the conjecture's 2003 origin, its relation to the Lyons--Steif stationary conjecture, its 2014 ICM restatement, later partial results, author profiles, and the exact scope of this project, see [history_zh.md](history_zh.md). A compact index of primary sources with direct PDF links is in [sources/README.md](sources/README.md).
+
 ## Reproduce the exact check
 
 Only Python's standard library is required. From this directory, run:
@@ -44,6 +46,9 @@ This package does not resolve the restriction to real symmetric kernels, prove t
 No license or DOI is asserted by this package.
 
 ## Files
+
+- [history_zh.md](history_zh.md): detailed Chinese history, author context, and a precise account of this project's contribution.
+- [sources/](sources/): primary-source index, direct external PDF links, and a reusable BibTeX bibliography.
 
 - [`main.pdf`](main.pdf), [`main.tex`](main.tex), and [`references.bib`](references.bib): frozen six-page manuscript and source.
 - [`certificates/`](certificates/): exact JSON, TSV, and TeX certificate data for all 32 events.
