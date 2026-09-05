@@ -297,10 +297,12 @@ This proves Theorem~\ref{thm:main} in its midpoint form.
 The accompanying file \texttt{verify\_exact.py} is self-contained and uses only
 the Python standard library.  Starting from the four vectors, it rebuilds all 32
 boundary terms, the prime-factor expression in \eqref{eq:limit}, the interior
-Hessian bounds, both endpoint distributions, and the finite entropy gap.  Its
+Hessian bounds, both endpoint distributions, and the finite entropy gap.  It
+also gives an exact rational certificate for the real symmetric Hessian block
+described below.  Its
 SHA-256 digest is
 \begin{center}
-\small\texttt{BDD005F16D9F5E1D84E3ADC4491757E52EFCB3E751DEF261B049380C3687DDD8}.
+\small\texttt{FBEA3920226D096A9490DE89EFFD6A8BA39C5AC68EDCA9DE251E445E5520148C}.
 \end{center}
 
 \section{Scope}
@@ -310,6 +312,12 @@ imaginary.  Complex conjugation fixes real symmetric directions and negates
 purely imaginary Hermitian directions.  Since \(H(\overline L)=H(L)\), the two
 subspaces are orthogonal for the Hessian at a real kernel.  The counterexample
 lies entirely in the imaginary block.
+
+At the particular midpoint \(K\) above, the Hessian is negative definite on the
+entire real symmetric block.  The checker proves this by an invertible rational
+change of basis after which the negative Hessian is strictly diagonally
+dominant.  Thus the real restriction was tested at this kernel, although this
+one local calculation does not settle it in general.
 
 The result therefore disproves Conjecture~2.6 with the real-or-complex
 quantifier used in the cited sources.  It does not decide the separate question

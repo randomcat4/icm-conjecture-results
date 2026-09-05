@@ -202,6 +202,160 @@ def scale(c, interval):
     return (c * lo, c * hi) if c >= 0 else (c * hi, c * lo)
 
 
+def interval_add(x, y):
+    return x[0] + y[0], x[1] + y[1]
+
+
+def interval_subtract(x, y):
+    return x[0] - y[1], x[1] - y[0]
+
+
+def interval_multiply(x, y):
+    products = (x[0] * y[0], x[0] * y[1], x[1] * y[0], x[1] * y[1])
+    return min(products), max(products)
+
+
+def inverse(M):
+    n = len(M)
+    augmented = [
+        list(M[i]) + [F(1 if i == j else 0) for j in range(n)]
+        for i in range(n)
+    ]
+    for column in range(n):
+        pivot = next(row for row in range(column, n) if augmented[row][column])
+        augmented[column], augmented[pivot] = augmented[pivot], augmented[column]
+        value = augmented[column][column]
+        augmented[column] = [entry / value for entry in augmented[column]]
+        for row in range(n):
+            if row == column:
+                continue
+            factor = augmented[row][column]
+            if factor:
+                augmented[row] = [
+                    augmented[row][j] - factor * augmented[column][j]
+                    for j in range(2 * n)
+                ]
+    return [row[n:] for row in augmented]
+
+
+def matrix_product(A, B):
+    return [
+        [sum((A[i][k] * B[k][j] for k in range(len(B))), F(0))
+         for j in range(len(B[0]))]
+        for i in range(len(A))
+    ]
+
+
+def matrix_trace(A):
+    return sum((A[i][i] for i in range(len(A))), F(0))
+
+
+def matrix_trace_product(A, B):
+    return sum(
+        (A[i][j] * B[j][i] for i in range(len(A)) for j in range(len(A))),
+        F(0),
+    )
+
+
+def real_symmetric_basis():
+    basis = []
+    for i in range(N):
+        A = [[F(0) for _ in range(N)] for _ in range(N)]
+        A[i][i] = F(1)
+        basis.append(A)
+    for i in range(N):
+        for j in range(i + 1, N):
+            A = [[F(0) for _ in range(N)] for _ in range(N)]
+            A[i][j] = A[j][i] = F(1)
+            basis.append(A)
+    return basis
+
+
+def real_hessian_intervals(K, basis=None):
+    if basis is None:
+        basis = real_symmetric_basis()
+    size = len(basis)
+    hessian = [[(F(0), F(0)) for _ in range(size)] for _ in range(size)]
+    for mask in range(1 << N):
+        S = {i for i in range(N) if mask & (1 << i)}
+        M = [[K[i][j] - (1 if i == j and i not in S else 0)
+              for j in range(N)] for i in range(N)]
+        event_sign = -1 if (N - len(S)) % 2 else 1
+        det_M = determinant(M)
+        p = event_sign * det_M
+        assert p > 0
+        R = inverse(M)
+        RA = [matrix_product(R, A) for A in basis]
+        traces = [matrix_trace(X) for X in RA]
+        log_p = log_interval(p)
+        for a in range(size):
+            for b in range(a + 1):
+                trace_product = matrix_trace_product(RA[a], RA[b])
+                dp_a = event_sign * det_M * traces[a]
+                dp_b = event_sign * det_M * traces[b]
+                d2p = event_sign * det_M * (
+                    traces[a] * traces[b] - trace_product
+                )
+                fisher = -dp_a * dp_b / p
+                logarithmic = scale(-d2p, log_p)
+                entry = interval_add((fisher, fisher), logarithmic)
+                hessian[a][b] = interval_add(hessian[a][b], entry)
+                hessian[b][a] = hessian[a][b]
+    return hessian
+
+
+REAL_PRECONDITIONER_INTEGERS = [
+    [155038, -170265, -37151, -6572, -43223, -351531, 724595, 46576, -196127, -10491487, 119458, 6854552, -1438924, 3875672, -55116],
+    [0, 216285, -7537, -2289, 24716, 349639, -1189199, -116933, 335025, 10457461, 5971466, -1147380, -2147004, 112437, -68825],
+    [0, 0, 142813, -29088, -18231, -15759, 463402, -53242, -150430, 2671318, -8146990, -803905, 4206898, 2445879, -4531096],
+    [0, 0, 0, 149501, -158435, -24198, -44897, -11954, -73423, -1261, 2040691, 1898657, 7803237, -891984, 9119164],
+    [0, 0, 0, 0, 237315, 41850, 46099, 135553, 84955, -2636035, 15376, -6801926, -8424212, -5542001, -4464123],
+    [0, 0, 0, 0, 0, 170654, -563863, -38505, 193245, 2593310, 4023787, -2167899, -1562645, 2965712, 1129663],
+    [0, 0, 0, 0, 0, 0, 713810, -2426, -148199, -1269388, -8107494, -2491582, -365644, -3118522, 2479487],
+    [0, 0, 0, 0, 0, 0, 0, 318525, -62668, -5271321, 4113920, -5546196, 2791303, -3968338, -2349331],
+    [0, 0, 0, 0, 0, 0, 0, 0, 232670, -1323464, 3072, -3400475, -4210244, 4751100, 4711411],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 5277273, -4114421, 1287134, -75276, -2832317, -1105152],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4085270, 3800443, 2106227, -5973178, -2446136],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8523092, -5434776, -1442067, -613046],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6752662, 2095140, -2386583],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7525038, -5784705],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6365158],
+]
+
+
+def preconditioned_real_basis():
+    original = real_symmetric_basis()
+    size = len(original)
+    assert all(REAL_PRECONDITIONER_INTEGERS[i][i] for i in range(size))
+    transformed = []
+    for column in range(size):
+        A = [[F(0) for _ in range(N)] for _ in range(N)]
+        for row in range(size):
+            coefficient = F(REAL_PRECONDITIONER_INTEGERS[row][column], 10**8)
+            if coefficient:
+                for i in range(N):
+                    for j in range(N):
+                        A[i][j] += coefficient * original[row][i][j]
+        transformed.append(A)
+    return transformed
+
+
+def verify_real_negative_definite(K):
+    """Exact Gershgorin certificate after a rational congruence."""
+    hessian = real_hessian_intervals(K, preconditioned_real_basis())
+    margins = []
+    for i in range(len(hessian)):
+        diagonal_lower = -hessian[i][i][1]
+        radius = sum(
+            max(abs(hessian[i][j][0]), abs(hessian[i][j][1]))
+            for j in range(len(hessian))
+            if j != i
+        )
+        margins.append(diagonal_lower - radius)
+    assert min(margins) > 0
+    return min(margins)
+
+
 def event_data(K, B):
     rows = []
     for mask in range(1 << N):
@@ -287,6 +441,9 @@ def main():
     epsilon = F(1, 10**6)
     assert t * t * frobenius_norm_squared < epsilon * epsilon
 
+    real_block_margin = verify_real_negative_definite(K)
+    assert real_block_margin > 0
+
     print("direct permutation expansion; no external packages")
     print("32 boundary rows rebuilt; sum b_S = sum w_S b_S = 0")
     print("boundary limit factorization and positivity verified")
@@ -296,6 +453,8 @@ def main():
     print("proved: H(K +/- 1e-9*iB) - H(K) > 1e-19")
     print("proved: endpoint laws agree event by event")
     print("proved: endpoint feasibility from ||B||_op <= ||B||_F = sqrt(170)")
+    print("proved: the Hessian is negative definite on the real symmetric block")
+    print("real-block rational congruence margin:", float(real_block_margin))
     print("display Hessian interval:", float(lower), float(upper))
     print("display chord-gap interval:", float(gap[0]), float(gap[1]))
 

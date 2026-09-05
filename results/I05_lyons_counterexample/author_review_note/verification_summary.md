@@ -1,12 +1,13 @@
 # Verification summary
 
-The five-page author-review note was checked in two fresh, read-only review contexts after the mathematical files were frozen.
+The five-page author-review note was checked in fresh, read-only review contexts after the mathematical files were frozen.  The added real-block certificate received a separate focused review after the final revision.
 
 ## Frozen files
 
-- `main.tex`: `73A86A4E620B9E3AB7E937D0EBD2218B758A428E1CED3C2276A81D62EC7C973B`
-- `verify_exact.py`: `BDD005F16D9F5E1D84E3ADC4491757E52EFCB3E751DEF261B049380C3687DDD8`
-- `main.pdf`: `D7EF292A5B77550C264998BD9CD6C4B8C6CA28A7B0CE62DF5F674EDFF40D1CD0`
+- `main.tex`: `EBDFCD0CB12D521DA2771C37415F9CE07830E60F838421065D4F1AF7A7710523`
+- `verify_exact.py`: `FBEA3920226D096A9490DE89EFFD6A8BA39C5AC68EDCA9DE251E445E5520148C`
+- `main.pdf`: `6FEE4EC5C23BCF8CBDECBB2B0E5A3C9C85056F6C172595BF5FC2BFFCCC68B961`
+- `author_review_email.md`: `E3933E78B466EA5177CAD0874704DBDCDCF27F0E677FD3D14FFC6DB01D62610E`
 
 ## Mathematical verdict
 
@@ -32,6 +33,10 @@ H(Q_+)-H(K)
 \]
 
 Its width is about \(1.21\times10^{-24}\), so the positive sign is not hidden by the logarithm-enclosure error.
+
+## Real-symmetric block verdict
+
+**CORRECT.** A separate reviewer checked all 15 real symmetric directions and all 225 mixed second derivatives.  The rational preconditioner is upper triangular with nonzero diagonal, hence invertible.  After the associated congruence, the interval enclosure for the negative Hessian is strictly diagonally dominant, with an exact positive Gershgorin margin whose decimal value is approximately \(0.9999634098734166\).  Therefore the Hessian at the displayed midpoint is negative definite on the entire real symmetric block.  This is a local statement at that kernel and does not settle the real-symmetric restriction in general.
 
 ## Exposition verdict
 
