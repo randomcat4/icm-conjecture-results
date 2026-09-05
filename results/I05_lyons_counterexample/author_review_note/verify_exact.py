@@ -1,28 +1,26 @@
-"""Dependency-free exact check, independent of the SymPy discovery code.
+"""Self-contained exact check for the five-point counterexample.
 
-Determinants and their t^2 coefficients are expanded directly over permutations.
-All inequalities use fractions.Fraction; floating point is used only for display.
+Determinants are expanded directly over permutations. Every asserted inequality
+uses fractions.Fraction; floating point appears only in the final display.
 """
 
 from __future__ import annotations
 
-import csv
 from collections import defaultdict
 from fractions import Fraction as F
 from itertools import combinations, permutations
-from pathlib import Path
 
 
 N = 5
 TERMS = 24
 
 
-def parity(p):
-    inversions = sum(p[i] > p[j] for i in range(N) for j in range(i + 1, N))
+def permutation_sign(p):
+    inversions = sum(p[i] > p[j] for i in range(len(p)) for j in range(i + 1, len(p)))
     return -1 if inversions % 2 else 1
 
 
-PERMS = [(p, parity(p)) for p in permutations(range(N))]
+PERMS = [(p, permutation_sign(p)) for p in permutations(range(N))]
 
 
 def determinant(M):
@@ -41,8 +39,7 @@ def determinant_small(M):
         return F(1)
     ans = F(0)
     for sigma in permutations(range(n)):
-        inversions = sum(sigma[i] > sigma[j] for i in range(n) for j in range(i + 1, n))
-        term = F(-1 if inversions % 2 else 1)
+        term = F(permutation_sign(sigma))
         for i in range(n):
             term *= M[i][sigma[i]]
         ans += term
@@ -50,7 +47,7 @@ def determinant_small(M):
 
 
 def determinant_second_jet(M, B):
-    """Second derivative at zero of det(M+i*t*B), returned as a rational."""
+    """Second derivative at zero of det(M+i*t*B), as a rational."""
     ans = F(0)
     for sigma, sign in PERMS:
         for a, b in combinations(range(N), 2):
@@ -60,6 +57,21 @@ def determinant_second_jet(M, B):
                     term *= M[i][sigma[i]]
             ans += term
     return 2 * ans
+
+
+def complex_multiply(z, w):
+    return z[0] * w[0] - z[1] * w[1], z[0] * w[1] + z[1] * w[0]
+
+
+def determinant_at_imaginary_step(M, B, t):
+    """Exact determinant of M+i*t*B, returned as (real, imaginary)."""
+    ans = (F(0), F(0))
+    for sigma, sign in PERMS:
+        term = (F(sign), F(0))
+        for i in range(N):
+            term = complex_multiply(term, (M[i][sigma[i]], t * B[i][sigma[i]]))
+        ans = ans[0] + term[0], ans[1] + term[1]
+    return ans
 
 
 def wedge(u, v):
@@ -85,10 +97,9 @@ def projection_and_direction():
     return P, B
 
 
-def construction():
+def construction_at(delta):
     P, B = projection_and_direction()
-    epsilon = F(1, 10**6)
-    K = [[(1 - 2 * epsilon) * P[i][j] + (epsilon if i == j else 0)
+    K = [[(1 - 2 * delta) * P[i][j] + (delta if i == j else 0)
           for j in range(N)] for i in range(N)]
     return K, B
 
@@ -119,40 +130,43 @@ def rational_prime_exponents(q):
     return ans
 
 
-def verify_boundary_table():
+def verify_boundary_data():
     P, B = projection_and_direction()
     Q = [[(1 if i == j else 0) - P[i][j] for j in range(N)] for i in range(N)]
-    rows = list(csv.DictReader((Path(__file__).parent / "boundary_table.csv").open(encoding="utf-8")))
-    assert len(rows) == 1 << N
+    rows = []
     sum_b = F(0)
     sum_wb = F(0)
     log_exponents = defaultdict(F)
-    for mask, row in enumerate(rows):
-        assert int(row["mask"]) == mask
+    for mask in range(1 << N):
         S = [i for i in range(N) if mask & (1 << i)]
         C = [i for i in range(N) if i not in S]
         w = abs(len(S) - 2)
-        a = determinant_small(principal(P, S)) if len(S) <= 2 else determinant_small(principal(Q, C))
-        M = [[P[i][j] - (1 if i == j and i in C else 0) for j in range(N)] for i in range(N)]
+        a = (determinant_small(principal(P, S)) if len(S) <= 2
+             else determinant_small(principal(Q, C)))
+        M = [[P[i][j] - (1 if i == j and i in C else 0)
+              for j in range(N)] for i in range(N)]
         event_sign = -1 if len(C) % 2 else 1
         b = event_sign * determinant_second_jet(M, B)
-        assert int(row["size"]) == len(S)
-        assert int(row["order_w"]) == w
-        assert F(row["leading_a"]) == a > 0
-        assert F(row["second_jet_b"]) == b
+        assert a > 0
+        rows.append((mask, len(S), w, a, b))
         sum_b += b
         sum_wb += w * b
         for prime, exponent in rational_prime_exponents(a).items():
             log_exponents[prime] += -b * exponent
     assert sum_b == 0
     assert sum_wb == 0
-    expected = {2: F(260, 5), 3: F(143, 5), 5: F(350, 5),
-                7: F(-87, 5), 13: F(-284, 5)}
+    expected = {
+        2: F(260, 5),
+        3: F(143, 5),
+        5: F(350, 5),
+        7: F(-87, 5),
+        13: F(-284, 5),
+    }
     assert {p: e for p, e in log_exponents.items() if e} == expected
     numerator = 2**260 * 3**143 * 5**350
     denominator = 7**87 * 13**284
     assert numerator > denominator
-    return len(str(numerator)), len(str(denominator))
+    return rows, len(str(numerator)), len(str(denominator))
 
 
 def atanh_log_interval(r):
@@ -188,12 +202,8 @@ def scale(c, interval):
     return (c * lo, c * hi) if c >= 0 else (c * hi, c * lo)
 
 
-def main():
-    numerator_digits, denominator_digits = verify_boundary_table()
-    K, B = construction()
-    lower = upper = F(0)
-    probability_sum = F(0)
-    jet_sum = F(0)
+def event_data(K, B):
+    rows = []
     for mask in range(1 << N):
         S = {i for i in range(N) if mask & (1 << i)}
         M = [[K[i][j] - (1 if i == j and i not in S else 0)
@@ -202,24 +212,92 @@ def main():
         p = event_sign * determinant(M)
         b = event_sign * determinant_second_jet(M, B)
         assert p > 0
-        probability_sum += p
-        jet_sum += b
+        rows.append((p, b))
+    assert sum((p for p, _ in rows), F(0)) == 1
+    assert sum((b for _, b in rows), F(0)) == 0
+    return rows
+
+
+def hessian_interval(K, B):
+    lower = upper = F(0)
+    for p, b in event_data(K, B):
         lo, hi = scale(-b, log_interval(p))
         lower += lo
         upper += hi
-    assert probability_sum == 1
-    assert jet_sum == 0
+    return lower, upper
+
+
+def event_probabilities_at_step(K, B, t):
+    probabilities = []
+    for mask in range(1 << N):
+        S = {i for i in range(N) if mask & (1 << i)}
+        M = [[K[i][j] - (1 if i == j and i not in S else 0)
+              for j in range(N)] for i in range(N)]
+        event_sign = -1 if (N - len(S)) % 2 else 1
+        real, imaginary = determinant_at_imaginary_step(M, B, t)
+        assert imaginary == 0
+        p = event_sign * real
+        assert p > 0
+        probabilities.append(p)
+    assert sum(probabilities, F(0)) == 1
+    return probabilities
+
+
+def entropy_interval(probabilities):
+    lower = upper = F(0)
+    for p in probabilities:
+        lo, hi = scale(-p, log_interval(p))
+        lower += lo
+        upper += hi
+    return lower, upper
+
+
+def main():
+    boundary_rows, numerator_digits, denominator_digits = verify_boundary_data()
+    assert len(boundary_rows) == 32
+
+    K, B = construction_at(F(1, 10**6))
+    lower, upper = hessian_interval(K, B)
     assert F(1, 2) < lower < upper < F(3, 5)
     assert F(5661274627785100258893, 10**22) < lower
     assert upper < F(5661274627785100258923, 10**22)
+
+    K4, _ = construction_at(F(1, 10**4))
+    K5, _ = construction_at(F(1, 10**5))
+    assert hessian_interval(K4, B)[1] < 0
+    assert hessian_interval(K5, B)[0] > 0
+
+    t = F(1, 10**9)
+    center_probabilities = event_probabilities_at_step(K, B, F(0))
+    plus_probabilities = event_probabilities_at_step(K, B, t)
+    minus_probabilities = event_probabilities_at_step(K, B, -t)
+    assert plus_probabilities == minus_probabilities
+    center_entropy = entropy_interval(center_probabilities)
+    endpoint_entropy = entropy_interval(plus_probabilities)
+    gap = (
+        endpoint_entropy[0] - center_entropy[1],
+        endpoint_entropy[1] - center_entropy[0],
+    )
+    assert gap[0] > F(1, 10**19)
+    assert F(281518, 10**24) < gap[0]
+    assert gap[1] < F(281520, 10**24)
+
+    frobenius_norm_squared = sum(B[i][j] ** 2 for i in range(N) for j in range(N))
+    assert frobenius_norm_squared == 170
+    epsilon = F(1, 10**6)
+    assert t * t * frobenius_norm_squared < epsilon * epsilon
+
     print("direct permutation expansion; no external packages")
-    print("boundary table rebuilt; sum b_S = sum w_S b_S = 0")
+    print("32 boundary rows rebuilt; sum b_S = sum w_S b_S = 0")
     print("boundary limit factorization and positivity verified")
     print("boundary ratio digit counts:", numerator_digits, denominator_digits)
-    print("sum p_S =", probability_sum)
-    print("sum b_S =", jet_sum)
     print("proved: 1/2 < D^2 H_K[iB,iB] < 3/5")
-    print("display interval:", float(lower), float(upper))
+    print("proved: Hessian is negative at delta=1e-4 and positive at delta=1e-5")
+    print("proved: H(K +/- 1e-9*iB) - H(K) > 1e-19")
+    print("proved: endpoint laws agree event by event")
+    print("proved: endpoint feasibility from ||B||_op <= ||B||_F = sqrt(170)")
+    print("display Hessian interval:", float(lower), float(upper))
+    print("display chord-gap interval:", float(gap[0]), float(gap[1]))
 
 
 if __name__ == "__main__":

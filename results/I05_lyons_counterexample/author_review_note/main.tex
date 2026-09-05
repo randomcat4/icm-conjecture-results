@@ -11,7 +11,7 @@
 \newcommand{\one}{\mathbf 1}
 
 \title{A Five-Point Counterexample to Concavity of Determinantal Entropy}
-\author{}
+\author{RenZhenzhuo\\\small on behalf of the Euler Agent Team}
 \date{Review note, 5 September 2026}
 
 \begin{document}
@@ -20,13 +20,12 @@
 \begin{abstract}
 Lyons asked whether the Shannon entropy of a finite determinantal probability
 measure is concave in its positive-contraction kernel.  We give a counterexample
-on five labelled points when complex Hermitian kernels are allowed.  The
-construction comes from a rank-two projection and a purely imaginary direction
-that is invisible to first order in every event probability.  The usually
-negative Fisher-information term therefore vanishes, while the second-order
-bending of the probability map has positive entropy pairing.  Four short integer
-vectors specify the example, and a dependency-free exact checker proves
-\(\tfrac12<D^2H_K[A,A]<\tfrac35\) at the explicit interior kernel.
+on five labelled points.  At a real symmetric kernel, every event probability is
+even along a purely imaginary Hermitian direction.  The Fisher-information term
+in the entropy Hessian therefore vanishes, and the remaining curvature term can
+be positive.  Four short integer vectors specify an example.  For explicit
+strict positive contractions \(Q_+,Q_-\) with midpoint \(K\), an exact rational
+calculation proves \(H(Q_+)=H(Q_-)>H(K)\).
 \end{abstract}
 
 \section{The question and the answer}
@@ -61,22 +60,29 @@ and write \(u\wedge v=uv^T-vu^T\).  Define
 \end{equation}
 and
 \begin{equation}\label{eq:K}
- \varepsilon=10^{-6},\qquad K=\varepsilon I+(1-2\varepsilon)P.
+ \varepsilon=10^{-6},\qquad K=\varepsilon I+(1-2\varepsilon)P,
+ \qquad t=10^{-9},\qquad Q_\pm=K\pm tA.
 \end{equation}
 
 \begin{theorem}\label{thm:main}
-The matrices in \eqref{eq:construction}--\eqref{eq:K} satisfy \(0<K<I\),
-\(A=A^*\), and
+The matrices in \eqref{eq:construction}--\eqref{eq:K} satisfy
+\(0<Q_\pm<I\), and their complete event distributions obey
 \[
- \frac12<D^2H_K[A,A]<\frac35.
+ p_S(Q_+)=p_S(Q_-)\quad(S\subseteq E),
+ \qquad
+ 2.81518\times10^{-19}<H(Q_+)-H(K)<2.81520\times10^{-19}.
 \]
-Consequently \(H\) is not concave on the complex Hermitian positive
-contractions on \(\C^5\).
+In particular,
+\[
+ H(K)<\frac{H(Q_-)+H(Q_+)}2.
+\]
+Thus Conjecture~2.6 is false as stated.
 \end{theorem}
 
-The rest of the note explains both the mechanism and the exact verification.
-The displayed decimal value, included only for orientation, is
+The same example has a positive entropy Hessian at its midpoint:
 \[
+ \frac12<D^2H_K[A,A]<\frac35,
+ \qquad
  D^2H_K[A,A]=0.56612746277851002589\ldots.
 \]
 
@@ -138,18 +144,20 @@ It follows at once that \(K\) has eigenvalue \(1-\varepsilon\) on
 \(\mathrm{ran}(P)\) and eigenvalue \(\varepsilon\) on \(\ker(P)\).  Thus
 \(0<K<I\), while \(A=iB\) is Hermitian.
 
-The two pieces of \(B\) are both needed.  A rotation confined to only one side
-of the projection gives a logarithmic divergence in \eqref{eq:reduced}.  The
-relative coefficient \(-\tfrac12\) balances the two sides so that the divergent
-terms cancel, leaving a finite positive limit.
+Both summands of \(B\) commute with \(P\).  This commutation, rather than the
+coefficient \(-\tfrac12\), is what removes the logarithmic divergence in the
+boundary calculation below.  The limiting curvature is an indefinite quadratic
+form on the two-dimensional space spanned by these rotations.  The coefficient
+\(-\tfrac12\) is a simple rational choice inside its positive cone.
 
 \section{The positive boundary limit}
 
 For \(0<\delta<1/2\), set
 \(K_\delta=\delta I+(1-2\delta)P\).  The coordinates of \(x\) are distinct,
 so every two-row minor of the matrix with columns \(\one,x\) is nonzero.
-Consequently the rank-two projection \(P\) is full spark.  For each subset \(S\)
-there is a positive rational number \(a_S\) such that
+Consequently \(P\) represents the uniform matroid \(U_{2,5}\): every
+two-coordinate principal minor is positive.  For each subset \(S\) there is a
+positive rational number \(a_S\) such that
 \begin{equation}\label{eq:asymptotic}
  p_S(K_\delta)=a_S\delta^{w_S}(1+O(\delta)),
  \qquad w_S=\bigl||S|-2\bigr|.
@@ -171,8 +179,8 @@ exact cancellations
  \qquad
  \sum_S w_Sb_S=0.
 \end{equation}
-The first is forced by \(\sum_Sp_S=1\).  The second is the balancing condition
-between the rotations in \(\mathrm{ran}(P)\) and \(\ker(P)\).  Equations
+The first is forced by \(\sum_Sp_S=1\).  The second follows here from
+\(PB=BP\).  Equations
 \eqref{eq:reduced}--\eqref{eq:cancellations}, together with
 \(\delta\log\delta\to0\), now give
 \begin{align}
@@ -184,6 +192,20 @@ between the rotations in \(\mathrm{ran}(P)\) and \(\ker(P)\).  Equations
 \end{align}
 This is an exact positive number: the numerator inside the logarithm is a
 392-digit integer, whereas the denominator is a 390-digit integer.
+
+The role of the coefficient in \eqref{eq:construction} can now be seen directly.
+Let \(B_1=\one\wedge x\) and \(B_2=q_2\wedge q_3\).  Each direction separately
+has a finite, negative boundary limit:
+\[
+ \lim_{\delta\downarrow0}D^2H_{K_\delta}[iB_1,iB_1]
+ =-24.38211062\ldots,
+ \qquad
+ \lim_{\delta\downarrow0}D^2H_{K_\delta}[iB_2,iB_2]
+ =-72.60746516\ldots.
+\]
+Their mixed term makes the quadratic form indefinite, and the rational direction
+\(B_1-\tfrac12B_2\) gives the positive value in \eqref{eq:limit}.  It was chosen
+for this simple exact form, not to maximize the normalized curvature.
 
 For transparency, Table~\ref{tab:grouped} groups the 32 determinant terms by
 their value of \(a_S\).  Its second column is
@@ -212,10 +234,19 @@ their value of \(a_S\).  Its second column is
 
 \section{An exact interior certificate}
 
-The positive limit already proves that all sufficiently small \(\delta\) are
-counterexamples.  To remove the hidden threshold, Theorem~\ref{thm:main} fixes
-\(\varepsilon=10^{-6}\).  The following verification uses rational arithmetic
-throughout.
+The positive limit proves that all sufficiently small \(\delta\) have positive
+curvature in this direction, but the scale is worth recording.  The same exact
+interval calculation gives
+\[
+ D^2H_{K_{10^{-4}}}[iB,iB]<0,
+ \qquad
+ D^2H_{K_{10^{-5}}}[iB,iB]>0.
+\]
+Their numerical values are \(-0.0710698\ldots\) and \(0.4916113\ldots\),
+respectively; the zero lies numerically near \(8.7430\times10^{-5}\).  This
+numerical location is not used in the proof.  We fix \(\varepsilon=10^{-6}\)
+and verify both the positive Hessian and a finite midpoint violation using
+rational arithmetic throughout.
 
 For a positive rational \(r\in[1,2]\), set \(y=(r-1)/(r+1)\).  The positive
 series for \(2\,\mathrm{atanh}(y)\) gives, for every positive integer \(m\),
@@ -249,33 +280,41 @@ The endpoints in the computation are exact fractions; the decimals in
 \eqref{eq:exactinterval} are shortened outward displays.  In particular,
 \(\tfrac12<D^2H_K[iB,iB]<\tfrac35\).
 
-Because \(K\) is an interior positive contraction, \(K+tA\) remains a positive
-contraction for all sufficiently small real \(t\).  A concave twice
-differentiable function cannot have positive second derivative along such an
-interior line.  This completes the proof of Theorem~\ref{thm:main}.
+For the finite chord, direct calculation gives \(\|B\|_F^2=170\).  Since
+\(\lambda_{\min}(K)=\lambda_{\min}(I-K)=10^{-6}\),
+\[
+ t\|B\|_{\rm op}\le t\|B\|_F<14\times10^{-9}<10^{-6}.
+\]
+Thus \(Q_\pm\) are strict positive contractions.  The evenness in
+\eqref{eq:vertical} holds for the full determinant polynomial, so
+\(p_S(Q_+)=p_S(Q_-)\) exactly.  Applying \eqref{eq:logbound} directly to the
+center and endpoint distributions gives the directed rational enclosure
+\[
+ 2.81518\times10^{-19}<H(Q_+)-H(K)<2.81520\times10^{-19}.
+\]
+This proves Theorem~\ref{thm:main} in its midpoint form.
 
-The exact checker uses only the Python standard library.  It is available with
-the ungrouped boundary table at
+The accompanying file \texttt{verify\_exact.py} is self-contained and uses only
+the Python standard library.  Starting from the four vectors, it rebuilds all 32
+boundary terms, the prime-factor expression in \eqref{eq:limit}, the interior
+Hessian bounds, both endpoint distributions, and the finite entropy gap.  Its
+SHA-256 digest is
 \begin{center}
-\small
-\url{https://github.com/randomcat4/icm-conjecture-results/tree/release/I05-lyons-counterexample-20260905/results/I05_lyons_counterexample/author_review_note}.
+\small\texttt{BDD005F16D9F5E1D84E3ADC4491757E52EFCB3E751DEF261B049380C3687DDD8}.
 \end{center}
 
 \section{Scope}
 
 The midpoint \(K\) is real symmetric, but the direction \(A=iB\) is purely
-imaginary.  The example therefore disproves the conjecture with the real-or-
-complex quantifier used in the cited sources.  It does not decide whether
-entropy is concave when kernels and directions are required to be real
-symmetric, and it does not establish that five is the smallest possible
-dimension.
+imaginary.  Complex conjugation fixes real symmetric directions and negates
+purely imaginary Hermitian directions.  Since \(H(\overline L)=H(L)\), the two
+subspaces are orthogonal for the Hessian at a real kernel.  The counterexample
+lies entirely in the imaginary block.
 
-The calculation also suggests a broader structural separation near projection
-kernels: the Fisher term can enforce negative curvature in all real directions
-while commuting imaginary directions retain a finite positive boundary limit.
-A companion note in the repository proves such a separation for an explicit
-one-parameter family.  That extension is not needed for the counterexample
-above.
+The result therefore disproves Conjecture~2.6 with the real-or-complex
+quantifier used in the cited sources.  It does not decide the separate question
+obtained by requiring all kernels and directions to be real symmetric, and it
+does not establish that five is the smallest possible dimension.
 
 We make no absolute priority claim.  To the best of our knowledge, the cited
 conjecture had no previously published proof or counterexample; private

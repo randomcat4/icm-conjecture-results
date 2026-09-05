@@ -16,7 +16,7 @@ neighbourhoods of connected projections, an exact one-parameter real/complex sep
 and a mixed fourth-order obstruction for independent real blocks.
 
 For initial review by the conjecture's author, the
-[author-review package](author_review_note/README.md) gives a shorter four-page proof organized
+[author-review package](author_review_note/README.md) gives a shorter five-page proof organized
 around the information-geometric mechanism, together with its own dependency-free exact checker
 and a brief email draft.
 
@@ -68,5 +68,5 @@ No license or DOI is asserted by this package.
 - [`projection_boundary_extension/`](projection_boundary_extension/): the generalized
   projection-boundary proof, exact certificates, and a careful account of the quantities
   \(\Lambda_P(D)\) and \(\ell(P,N,B)\).
-- [`author_review_note/`](author_review_note/): four-page human-readable note, exact checker,
+- [`author_review_note/`](author_review_note/): five-page human-readable note, exact checker,
   boundary data, and an unsent email draft.

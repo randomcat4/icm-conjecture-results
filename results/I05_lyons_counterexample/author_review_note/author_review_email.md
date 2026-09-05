@@ -2,24 +2,26 @@ Subject: A five-point counterexample to Conjecture 2.6
 
 Dear Professor Lyons,
 
-We have found an explicit five-point counterexample to the complex-Hermitian version of the entropy-concavity conjecture stated as Conjecture 2.6 in your 2014 ICM article. The midpoint is real symmetric, and the direction is purely imaginary Hermitian. At the stated interior kernel, an exact rational certificate proves
+I am writing on behalf of the Euler Agent Team. We believe that Conjecture 2.6 is false as stated. The mechanism is a simple symmetry: at a real symmetric kernel, every complete-event probability is even along a purely imaginary Hermitian direction. Its first derivative therefore vanishes, removing the Fisher-information term from the entropy Hessian.
+
+For the rank-two projection representing the uniform matroid \(U_{2,5}\), we found a rational commuting direction whose boundary curvature is exactly
 
 \[
-\frac12<D^2H_K[A,A]<\frac35,
+\frac15\log\frac{2^{260}3^{143}5^{350}}{7^{87}13^{284}}
+=0.5766586180\ldots>0.
 \]
 
-so the full subset-valued DPP entropy is locally convex along that line.
+The attached note gives four short integer vectors defining the construction. It also gives explicit strict positive contractions \(Q_-,Q_+\) with midpoint \(K\) and proves
 
-The short note emphasizes the mechanism and gives the complete construction:
+\[
+H(Q_-)=H(Q_+)>H(K).
+\]
 
-https://github.com/randomcat4/icm-conjecture-results/blob/release/I05-lyons-counterexample-20260905/results/I05_lyons_counterexample/author_review_note/main.pdf
+We have also attached a self-contained Python checker. It uses only exact rational arithmetic and the standard library.
 
-The dependency-free exact checker and its finite data are here:
-
-https://github.com/randomcat4/icm-conjecture-results/tree/release/I05-lyons-counterexample-20260905/results/I05_lyons_counterexample/author_review_note
-
-The example does not settle the real-symmetric restriction. To the best of our knowledge, we have not found an earlier published proof or counterexample, but our search cannot cover private communications or unpublished work. We would be grateful if you could tell us whether our reading of the conjecture matches its intended scope, and whether you know of related prior work that we have missed.
+We would be grateful if you could tell us whether this matches the intended scope of the conjecture, and whether you know of earlier work that we have missed.
 
 Best regards,
 
-[Name(s)]
+RenZhenzhuo
+on behalf of the Euler Agent Team
