@@ -18,6 +18,7 @@ Lyons restated the problem as Conjecture 2.6 in his invited article for the 2014
 This repository gives an exact five-dimensional counterexample to the conjecture as stated over complex Hilbert spaces. The midpoint is a rational real symmetric kernel, the violating direction is purely imaginary Hermitian of rank four, and the strict entropy inequality is certified by exact rational calculations:
 
 - [Proof PDF](results/I05_lyons_counterexample/main.pdf)
+- [Four-page author-review note and exact checker](results/I05_lyons_counterexample/author_review_note/README.md)
 - [Result overview and reproduction instructions](results/I05_lyons_counterexample/README.md)
 - [Independent verification summary](results/I05_lyons_counterexample/verification_summary.md)
 - [中文：问题的提出、发展、作者与本项目贡献](results/I05_lyons_counterexample/history_zh.md)

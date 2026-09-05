@@ -15,6 +15,11 @@ local-curvature proof mechanism together with broader structural results: real c
 neighbourhoods of connected projections, an exact one-parameter real/complex separation family,
 and a mixed fourth-order obstruction for independent real blocks.
 
+For initial review by the conjecture's author, the
+[author-review package](author_review_note/README.md) gives a shorter four-page proof organized
+around the information-geometric mechanism, together with its own dependency-free exact checker
+and a brief email draft.
+
 ## Reproduce the exact check
 
 Only Python's standard library is required. From this directory, run:
@@ -63,3 +68,5 @@ No license or DOI is asserted by this package.
 - [`projection_boundary_extension/`](projection_boundary_extension/): the generalized
   projection-boundary proof, exact certificates, and a careful account of the quantities
   \(\Lambda_P(D)\) and \(\ell(P,N,B)\).
+- [`author_review_note/`](author_review_note/): four-page human-readable note, exact checker,
+  boundary data, and an unsent email draft.

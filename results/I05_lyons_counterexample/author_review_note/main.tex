@@ -1,0 +1,288 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=27mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,array,microtype}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newcommand{\C}{\mathbb C}
+\newcommand{\R}{\mathbb R}
+\newcommand{\PP}{\mathbb P}
+\newcommand{\one}{\mathbf 1}
+
+\title{A Five-Point Counterexample to Concavity of Determinantal Entropy}
+\author{}
+\date{Review note, 5 September 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Lyons asked whether the Shannon entropy of a finite determinantal probability
+measure is concave in its positive-contraction kernel.  We give a counterexample
+on five labelled points when complex Hermitian kernels are allowed.  The
+construction comes from a rank-two projection and a purely imaginary direction
+that is invisible to first order in every event probability.  The usually
+negative Fisher-information term therefore vanishes, while the second-order
+bending of the probability map has positive entropy pairing.  Four short integer
+vectors specify the example, and a dependency-free exact checker proves
+\(\tfrac12<D^2H_K[A,A]<\tfrac35\) at the explicit interior kernel.
+\end{abstract}
+
+\section{The question and the answer}
+
+Let \(E=[5]\).  If \(K\) is a Hermitian matrix with \(0\preceq K\preceq I\),
+the determinantal probability measure \(\PP^K\) on subsets of \(E\) is defined by
+\[
+ \PP^K(T\subseteq X)=\det K[T].
+\]
+Writing \(p_S(K)=\PP^K(X=S)\), its entropy is
+\[
+ H(K)=-\sum_{S\subseteq E}p_S(K)\log p_S(K).
+\]
+The conjecture that \(H\) is concave in \(K\) was posed by
+Lyons~\cite{Lyons2003DPM} and restated as Conjecture~2.6 in his ICM
+survey~\cite{Lyons2014}.  The formulation there permits real or complex Hilbert
+spaces.
+
+Here is the counterexample.  Put
+\[
+\begin{aligned}
+ \one&=(1,1,1,1,1)^T,             &x&=(-2,-1,0,1,2)^T,\\
+ q_2&=(2,-1,-2,-1,2)^T,           &q_3&=(-1,2,0,-2,1)^T,
+\end{aligned}
+\]
+and write \(u\wedge v=uv^T-vu^T\).  Define
+\begin{equation}\label{eq:construction}
+ P=\frac15\one\one^T+\frac1{10}xx^T,
+ \qquad
+ B=\one\wedge x-\frac12q_2\wedge q_3,
+ \qquad A=iB,
+\end{equation}
+and
+\begin{equation}\label{eq:K}
+ \varepsilon=10^{-6},\qquad K=\varepsilon I+(1-2\varepsilon)P.
+\end{equation}
+
+\begin{theorem}\label{thm:main}
+The matrices in \eqref{eq:construction}--\eqref{eq:K} satisfy \(0<K<I\),
+\(A=A^*\), and
+\[
+ \frac12<D^2H_K[A,A]<\frac35.
+\]
+Consequently \(H\) is not concave on the complex Hermitian positive
+contractions on \(\C^5\).
+\end{theorem}
+
+The rest of the note explains both the mechanism and the exact verification.
+The displayed decimal value, included only for orientation, is
+\[
+ D^2H_K[A,A]=0.56612746277851002589\ldots.
+\]
+
+\section{Why a purely imaginary direction is useful}
+
+The complete-event probabilities admit the signed determinant formula
+\begin{equation}\label{eq:event}
+ p_S(K)=(-1)^{|E\setminus S|}
+ \det\bigl(K-I_{E\setminus S}\bigr),
+\end{equation}
+where \(I_T\) is the diagonal coordinate projection onto \(T\).  This follows
+directly from M\"obius inversion of the inclusion probabilities.
+
+Let \(\Phi(K)=(p_S(K))_S\) be the map from kernels to the probability simplex.
+At an interior kernel, differentiating entropy twice gives
+\begin{equation}\label{eq:hessian}
+ D^2H_K[A,A]
+ =-\sum_S\frac{(Dp_S(K)[A])^2}{p_S(K)}
+  -\sum_S D^2p_S(K)[A,A]\log p_S(K).
+\end{equation}
+The first sum is the pullback of the Fisher metric and is always non-positive.
+The second sum records the curvature of the probability map in the direction of
+the entropy gradient.
+
+The construction makes the first sum disappear.  If \(K\) is real symmetric
+and \(B\) is real skew-symmetric, then
+\[
+ \det(K-I_{E\setminus S}+itB)
+ =\det(K-I_{E\setminus S}-itB),
+\]
+because transposition changes \(t\) to \(-t\).  Thus every event probability is
+an even function of \(t\), and
+\begin{equation}\label{eq:vertical}
+ Dp_S(K)[iB]=0\qquad(S\subseteq E).
+\end{equation}
+If
+\[
+ b_S(K,B)=\left.\frac{d^2}{dt^2}p_S(K+itB)\right|_{t=0},
+\]
+then \eqref{eq:hessian} reduces to
+\begin{equation}\label{eq:reduced}
+ D^2H_K[iB,iB]= -\sum_S b_S(K,B)\log p_S(K).
+\end{equation}
+In information-geometric language, \(iB\) lies in the differential kernel of
+\(\Phi\); the sign is decided entirely by the vertical second-order bending of
+\(\Phi\).
+
+\section{How the four vectors were chosen}
+
+The vectors \(\one,x,q_2,q_3\) are pairwise orthogonal across the two displayed
+pairs: \(\one\perp x\), and \(q_2,q_3\perp\one,x\).  Since
+\(\|\one\|^2=5\) and \(\|x\|^2=10\), the matrix \(P\) is the orthogonal
+projection onto \(\langle\one,x\rangle\).  The two summands of \(B\) rotate,
+respectively, inside \(\mathrm{ran}(P)\) and inside \(\ker(P)\).  Hence
+\begin{equation}\label{eq:commute}
+ P^2=P=P^T,\qquad B^T=-B,\qquad PB=BP.
+\end{equation}
+It follows at once that \(K\) has eigenvalue \(1-\varepsilon\) on
+\(\mathrm{ran}(P)\) and eigenvalue \(\varepsilon\) on \(\ker(P)\).  Thus
+\(0<K<I\), while \(A=iB\) is Hermitian.
+
+The two pieces of \(B\) are both needed.  A rotation confined to only one side
+of the projection gives a logarithmic divergence in \eqref{eq:reduced}.  The
+relative coefficient \(-\tfrac12\) balances the two sides so that the divergent
+terms cancel, leaving a finite positive limit.
+
+\section{The positive boundary limit}
+
+For \(0<\delta<1/2\), set
+\(K_\delta=\delta I+(1-2\delta)P\).  The coordinates of \(x\) are distinct,
+so every two-row minor of the matrix with columns \(\one,x\) is nonzero.
+Consequently the rank-two projection \(P\) is full spark.  For each subset \(S\)
+there is a positive rational number \(a_S\) such that
+\begin{equation}\label{eq:asymptotic}
+ p_S(K_\delta)=a_S\delta^{w_S}(1+O(\delta)),
+ \qquad w_S=\bigl||S|-2\bigr|.
+\end{equation}
+More explicitly,
+\[
+ a_S=\det P[S]\quad(|S|\le2),
+ \qquad
+ a_S=\det(I-P)[E\setminus S]\quad(|S|\ge2).
+\]
+These formulas follow either from the spectral Bernoulli mixture for
+\(K_\delta\), or directly from principal-minor expansion and Jacobi's
+complementary-minor identity.
+
+Let \(b_S=b_S(P,B)\).  Direct second-order determinant expansion gives the two
+exact cancellations
+\begin{equation}\label{eq:cancellations}
+ \sum_S b_S=0,
+ \qquad
+ \sum_S w_Sb_S=0.
+\end{equation}
+The first is forced by \(\sum_Sp_S=1\).  The second is the balancing condition
+between the rotations in \(\mathrm{ran}(P)\) and \(\ker(P)\).  Equations
+\eqref{eq:reduced}--\eqref{eq:cancellations}, together with
+\(\delta\log\delta\to0\), now give
+\begin{align}
+ \lim_{\delta\downarrow0}D^2H_{K_\delta}[iB,iB]
+ &=-\sum_Sb_S\log a_S \notag\\
+ &=\frac15\log
+ \frac{2^{260}3^{143}5^{350}}{7^{87}13^{284}}
+ =0.57665861803438136898\ldots.       \label{eq:limit}
+\end{align}
+This is an exact positive number: the numerator inside the logarithm is a
+392-digit integer, whereas the denominator is a 390-digit integer.
+
+For transparency, Table~\ref{tab:grouped} groups the 32 determinant terms by
+their value of \(a_S\).  Its second column is
+\(B_a=\sum_{S:a_S=a}b_S\); hence \(-\sum_aB_a\log a\) reproduces
+\eqref{eq:limit}.  The ungrouped table is supplied with the checker.
+
+\begin{table}[ht]
+\centering
+\small
+\caption{Grouped data for the boundary logarithmic sum.}\label{tab:grouped}
+\begin{tabular}{@{}rr@{\qquad}rr@{}}
+\toprule
+\(a\)&\(B_a\)&\(a\)&\(B_a\)\\
+\midrule
+\(1/50\)&\(72/5\)&\(2/5\)&\(-2\)\\
+\(2/25\)&\(-204/5\)&\(12/25\)&\(128/5\)\\
+\(3/25\)&\(41/5\)&\(13/25\)&\(284/5\)\\
+\(9/50\)&\(-606/5\)&\(3/5\)&\(120\)\\
+\(1/5\)&\(20\)&\(7/10\)&\(-32\)\\
+\(7/25\)&\(247/5\)&\(4/5\)&\(-36\)\\
+\(3/10\)&\(60\)&\(1\)&\(-100\)\\
+\(8/25\)&\(-112/5\)&&\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{An exact interior certificate}
+
+The positive limit already proves that all sufficiently small \(\delta\) are
+counterexamples.  To remove the hidden threshold, Theorem~\ref{thm:main} fixes
+\(\varepsilon=10^{-6}\).  The following verification uses rational arithmetic
+throughout.
+
+For a positive rational \(r\in[1,2]\), set \(y=(r-1)/(r+1)\).  The positive
+series for \(2\,\mathrm{atanh}(y)\) gives, for every positive integer \(m\),
+\begin{equation}\label{eq:logbound}
+ 2\sum_{j=0}^{m-1}\frac{y^{2j+1}}{2j+1}
+ \le \log r\le
+ 2\sum_{j=0}^{m-1}\frac{y^{2j+1}}{2j+1}
+ +\frac{2y^{2m+1}}{(2m+1)(1-y^2)}.
+\end{equation}
+Every positive rational probability is written as \(2^kr\) with
+\(1\le r<2\).  Taking \(m=24\) in \eqref{eq:logbound} gives directed rational
+intervals for all logarithms in \eqref{eq:reduced}.
+
+The event probabilities and second derivatives are also rational.  They are
+computed by expanding each five-by-five determinant over its 120 permutations
+and extracting the coefficients of \(t^0\) and \(t^2\).  Summation checks
+\[
+ p_S(K)>0\quad\hbox{for all }S,
+ \qquad \sum_Sp_S(K)=1,
+ \qquad \sum_Sb_S(K,B)=0.
+\]
+Applying the lower logarithm endpoint to positive coefficients and the upper
+endpoint to negative coefficients, with the choices reversed for the upper
+bound, proves
+\begin{equation}\label{eq:exactinterval}
+ 0.5661274627785100258893
+ <D^2H_K[iB,iB]<
+ 0.5661274627785100258923.
+\end{equation}
+The endpoints in the computation are exact fractions; the decimals in
+\eqref{eq:exactinterval} are shortened outward displays.  In particular,
+\(\tfrac12<D^2H_K[iB,iB]<\tfrac35\).
+
+Because \(K\) is an interior positive contraction, \(K+tA\) remains a positive
+contraction for all sufficiently small real \(t\).  A concave twice
+differentiable function cannot have positive second derivative along such an
+interior line.  This completes the proof of Theorem~\ref{thm:main}.
+
+The exact checker uses only the Python standard library.  It is available with
+the ungrouped boundary table at
+\begin{center}
+\small
+\url{https://github.com/randomcat4/icm-conjecture-results/tree/release/I05-lyons-counterexample-20260905/results/I05_lyons_counterexample/author_review_note}.
+\end{center}
+
+\section{Scope}
+
+The midpoint \(K\) is real symmetric, but the direction \(A=iB\) is purely
+imaginary.  The example therefore disproves the conjecture with the real-or-
+complex quantifier used in the cited sources.  It does not decide whether
+entropy is concave when kernels and directions are required to be real
+symmetric, and it does not establish that five is the smallest possible
+dimension.
+
+The calculation also suggests a broader structural separation near projection
+kernels: the Fisher term can enforce negative curvature in all real directions
+while commuting imaginary directions retain a finite positive boundary limit.
+A companion note in the repository proves such a separation for an explicit
+one-parameter family.  That extension is not needed for the counterexample
+above.
+
+We make no absolute priority claim.  To the best of our knowledge, the cited
+conjecture had no previously published proof or counterexample; private
+communications, seminars, unpublished notes, and unsuccessful attempts are
+outside the scope of our search.
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}
