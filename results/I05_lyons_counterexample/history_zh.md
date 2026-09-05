@@ -28,7 +28,7 @@ $$
 
 ## 2. 2002–2003：有限猜想的提出
 
-Lyons 的论文 *Determinantal Probability Measures* 于 2002 年 4 月提交 arXiv，2003 年发表于 *Publications Mathématiques de l'IHÉS* 第 98 卷，第 167–212 页。论文主要建立离散 DPP 与拟阵、随机支配、负相关、尾事件和正压缩扩张之间的基础理论；熵凹性出现在第 9 节“Further Questions”的末段，而不是论文主定理。
+Lyons 的论文 *Determinantal Probability Measures* 于 2002 年 4 月提交 arXiv，2003 年发表于 *Publications Mathématiques de l'IHÉS* 第 98 卷，第 167–212 页。论文主要建立离散 DPP 与拟阵、随机支配、负相关、尾事件和正压缩扩张之间的基础理论；熵凹性出现在第 9 节“Open questions: General theory”中，而不是论文主定理。
 
 在印刷页 201，Lyons 先定义有限 $E$ 上的完整分布熵，随后明确写道数值计算支持该命题，并将它列为 **Conjecture 9.2**。因此最初证据是数值观察；原文没有给出一般证明，也没有报告一个证明计划。
 
@@ -65,9 +65,9 @@ $$
 
 ## 4. 2012：机器学习文献记录了猜想，但没有推进证明
 
-Alex Kulesza 的宾夕法尼亚大学博士论文 *Learning with Determinantal Point Processes* 把 DPP 用于多样化子集选择和机器学习。论文第 2.2.7 节讨论最大熵拟合，明确记录 Lyons 的猜想及“尚无证明”的状态，同时指出完整熵是一个含 $2^N$ 项、又因对数破坏行列式多线性简化的目标。论文随后把熵最大化留给未来工作。
+Alex Kulesza 的宾夕法尼亚大学博士论文 *Learning with Determinantal Point Processes* 把 DPP 用于多样化子集选择和机器学习。论文第 2.5.1 节将 Lyons 的猜想列为 Conjecture 2.1，写道数值模拟有力支持该猜想，但作者不知道证明；第 7.1 节又把熵凹性列为未来工作。
 
-这条记录说明该猜想进入了 DPP 机器学习研究者的视野，但它不是一次证明尝试，也没有形成后续的专题论文链。
+这条记录说明该猜想进入了 DPP 机器学习研究者的视野；论文没有证明新的特殊情形。
 
 原始资料：[论文 PDF](https://www.alexkulesza.com/pubs/thesis.pdf)；[作者的论文目录与书目信息](https://www.alexkulesza.com/)。
 
@@ -87,13 +87,13 @@ Lyons 的邀请报告 *Determinantal Probability: Basic Properties and Conjectur
 
 ## 6. 2020：Yuzhou Gu 给出三个实质性部分结果
 
-Yuzhou Gu 的 MIT 6.881 课程项目报告 *Entropy of Determinantal Point Processes* 是目前公开资料中最明确以 Lyons 猜想为目标的独立推进。报告证明：
+Yuzhou Gu 的 MIT 6.881 课程项目报告 *Entropy of Determinantal Point Processes* 直接以 Lyons 猜想为目标。报告证明：
 
 1. 点数随机变量 $|X(K)|$ 的熵关于 $K$ 凹；
 2. 一条线段的一个端点为零核时，完整 DPP 熵满足所需凹性；
 3. 当 $\mathrm{rank}(K_1-K_2)=1$ 时，完整 DPP 熵沿该线段凹。
 
-第一条处理的是点数熵而非完整子集熵；后两条是真正的完整熵特殊情形。它们与本仓库的反例兼容，因为这里的反例方向是秩四的纯虚 Hermitian 方向。该报告是课程项目稿，不是经同行评议的期刊论文；我们没有找到由它继续发展出的公开专题论文系列。
+第一条处理的是点数熵而非完整子集熵；后两条是真正的完整熵特殊情形。它们与本仓库的反例兼容，因为这里的反例方向是秩四的纯虚 Hermitian 方向。该报告是课程项目稿，不是经同行评议的期刊论文。
 
 原始资料：[报告 PDF](https://sevenkplus.com/data/dpp.pdf)。
 
@@ -111,7 +111,7 @@ $$
 H(K)<\frac{H(K-hA)+H(K+hA)}2.
 $$
 
-候选首先通过完整 Hermitian Hessian 的有限数值搜索出现。登记批次在维数三、四没有命中，在维数五、六出现正方向；随后我们停止扩大搜索，把第一个五维候选按预定分母次序有理化。最终证明不依赖浮点数或继续穷举：
+最终证明不依赖浮点数或继续穷举：
 
 1. Sylvester 判据以正有理数证明中心和端点严格位于 $0$ 与 $I$ 之间；
 2. 逐项精确计算五个标号坐标的全部 32 个事件概率，证明每项为正、总和为一，且两个端点逐事件相等；
@@ -136,26 +136,19 @@ $$
 - 没有证明维数五最小；
 - 没有分类哪些 $K$ 或哪些方向必然保持熵凹性；
 - 没有反驳 Lyons–Steif 的平稳 Toeplitz 熵率猜想；
-- 有限文献检索没有找到更早的公开证明或反例，但这不是绝对新颖性或优先权认证。
 
 完整公开证明见 [main.pdf](main.pdf)，复核范围见 [verification_summary.md](verification_summary.md)，可执行证书见 [scripts/verify_exact.py](scripts/verify_exact.py)。
 
 ## 8. 作者简介
 
-**Russell Lyons** 是美国概率论学者，现任 Indiana University Bloomington 的 James H. Rudy Professor of Mathematics，并兼任统计学教授。他的研究横跨图上的概率、组合学、统计力学、遍历论、调和分析和几何群论。有限 DPP 熵凹性猜想由他在 2003 年提出，并在 2014 年 ICM 邀请报告中重述。[Indiana University 官方简介](https://math.indiana.edu/about/faculty/lyons-russell.html)
+**Russell Lyons** 是美国概率论学者，现任 Indiana University Bloomington 的 James H. Rudy Professor of Mathematics，并兼任 Adjunct Professor of Statistics。他的研究横跨图上的概率、组合学、统计力学、遍历论、调和分析和几何群论。有限 DPP 熵凹性猜想由他在 2003 年提出，并在 2014 年 ICM 邀请报告中重述。[Indiana University 官方简介](https://math.indiana.edu/about/faculty/lyons-russell.html)
 
-这位原作者具有很强的顶级期刊和学术服务履历。他的论文 *Fourier–Stieltjes Coefficients and Asymptotic Distribution Modulo 1* 发表于 *Annals of Mathematics* 122 (1985), 155–170；提出本猜想的 2003 年 DPP 论文自身发表于 *Publications Mathématiques de l'IHÉS*。他还是 2014 年 ICM 邀请报告人，并自 2022 年起担任 *Annals of Mathematics* 副编辑。[Annals 1985 年卷页](https://annals.math.princeton.edu/1985/122-1)；[Lyons 官方履历](https://rdlyons.pages.iu.edu/pdf/cv-web.pdf)
+他的论文 *Fourier–Stieltjes Coefficients and Asymptotic Distribution Modulo 1* 发表于 *Annals of Mathematics* 122 (1985), 155–170；提出本猜想的 2003 年 DPP 论文自身发表于 *Publications Mathématiques de l'IHÉS*。他还是 2014 年 ICM 邀请报告人，并自 2022 年起担任 *Annals of Mathematics* 副编辑。[Annals 1985 年卷页](https://annals.math.princeton.edu/1985/122-1)；[Lyons 官方履历](https://rdlyons.pages.iu.edu/pdf/cv-web.pdf)
 
 **Jeffrey E. Steif** 是 Chalmers University of Technology 数学科学系分析与概率论教授，也是瑞典皇家科学院数学类成员。他的研究包括概率论、渗流、噪声敏感性、随机过程和遍历性质。他与 Lyons 共同提出的是相关的无限平稳 DPP 熵率猜想。[Chalmers 官方简介](https://www.chalmers.se/en/persons/steif/)；[瑞典皇家科学院简介](https://www.kva.se/en/contact/jeffrey-steif-2/)
 
 **Yuzhou Gu** 的研究领域包括信息论、统计、概率和计算机科学。他于 2023 年获 MIT EECS 博士学位，曾任 Institute for Advanced Study 数学学院成员。2020 年还是 MIT 学生时，他完成了上述三个部分结果。[IAS 简介](https://www.ias.edu/scholars/yuzhou-gu)；[个人主页](https://sevenkplus.com/)
 
 本仓库中的反例由本项目在机器辅助探索、严格有理化和相互隔离的复核流程中获得。公开稿目前保留作者占位符；该占位符不应被解释为作者名单、署名决定或优先权声明。
-
-## 9. 对公开研究史的谨慎判断
-
-截至 2026 年 9 月 5 日，本项目以猜想编号、原句、作者名以及“DPP entropy concavity”等等价表达做了有限检索。可见记录显示：该问题被 DPP 概率论和机器学习文献注意过，Gu 也给出了有内容的部分结果，但没有出现多篇彼此推进的证明论文或稳定研究群体。更合适的描述是“长期处于边缘、只有零星实质尝试的有趣猜想”，而不是“许多人围攻后遗留的著名难题”。
-
-**尽我们所知，在本项目结果形成以前，公开文献中没有该有限完整熵猜想的一般证明或严格反例。** 这一表述限于我们查到的公开记录；私人通信、讨论班、未公开笔记和未发表尝试不在可核实范围内，因此这里不作不受限定的绝对首发声明。
 
 所有来源的集中索引和直接 PDF 链接见 [sources/README.md](sources/README.md)。
