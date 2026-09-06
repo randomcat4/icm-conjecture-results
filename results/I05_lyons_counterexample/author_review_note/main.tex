@@ -1,0 +1,335 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=27mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,array,microtype}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newcommand{\C}{\mathbb C}
+\newcommand{\R}{\mathbb R}
+\newcommand{\PP}{\mathbb P}
+\newcommand{\one}{\mathbf 1}
+
+\title{A Five-Point Counterexample to Concavity of Determinantal Entropy}
+\author{RenZhenzhuo\\\small on behalf of the Euler Agent Team}
+\date{Review note, 5 September 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Lyons asked whether the Shannon entropy of a finite determinantal probability
+measure is concave in its positive-contraction kernel.  We give a counterexample
+on five labelled points.  At a real symmetric kernel, every event probability is
+even along a purely imaginary Hermitian direction.  The Fisher-information term
+in the entropy Hessian therefore vanishes, and the remaining curvature term can
+be positive.  Four short integer vectors specify an example.  For explicit
+strict positive contractions \(Q_+,Q_-\) with midpoint \(K\), an exact rational
+calculation proves \(H(Q_+)=H(Q_-)>H(K)\).
+\end{abstract}
+
+\section{The question and the answer}
+
+Let \(E=[5]\).  If \(K\) is a Hermitian matrix with \(0\preceq K\preceq I\),
+the determinantal probability measure \(\PP^K\) on subsets of \(E\) is defined by
+\[
+ \PP^K(T\subseteq X)=\det K[T].
+\]
+Writing \(p_S(K)=\PP^K(X=S)\), its entropy is
+\[
+ H(K)=-\sum_{S\subseteq E}p_S(K)\log p_S(K).
+\]
+The conjecture that \(H\) is concave in \(K\) was posed by
+Lyons~\cite{Lyons2003DPM} and restated as Conjecture~2.6 in his ICM
+survey~\cite{Lyons2014}.  The formulation there permits real or complex Hilbert
+spaces.
+
+Here is the counterexample.  Put
+\[
+\begin{aligned}
+ \one&=(1,1,1,1,1)^T,             &x&=(-2,-1,0,1,2)^T,\\
+ q_2&=(2,-1,-2,-1,2)^T,           &q_3&=(-1,2,0,-2,1)^T,
+\end{aligned}
+\]
+and write \(u\wedge v=uv^T-vu^T\).  Define
+\begin{equation}\label{eq:construction}
+ P=\frac15\one\one^T+\frac1{10}xx^T,
+ \qquad
+ B=\one\wedge x-\frac12q_2\wedge q_3,
+ \qquad A=iB,
+\end{equation}
+and
+\begin{equation}\label{eq:K}
+ \varepsilon=10^{-6},\qquad K=\varepsilon I+(1-2\varepsilon)P,
+ \qquad t=10^{-9},\qquad Q_\pm=K\pm tA.
+\end{equation}
+
+\begin{theorem}\label{thm:main}
+The matrices in \eqref{eq:construction}--\eqref{eq:K} satisfy
+\(0<Q_\pm<I\), and their complete event distributions obey
+\[
+ p_S(Q_+)=p_S(Q_-)\quad(S\subseteq E),
+ \qquad
+ 2.81518\times10^{-19}<H(Q_+)-H(K)<2.81520\times10^{-19}.
+\]
+In particular,
+\[
+ H(K)<\frac{H(Q_-)+H(Q_+)}2.
+\]
+Thus Conjecture~2.6 is false as stated.
+\end{theorem}
+
+The same example has a positive entropy Hessian at its midpoint:
+\[
+ \frac12<D^2H_K[A,A]<\frac35,
+ \qquad
+ D^2H_K[A,A]=0.56612746277851002589\ldots.
+\]
+
+\section{Why a purely imaginary direction is useful}
+
+The complete-event probabilities admit the signed determinant formula
+\begin{equation}\label{eq:event}
+ p_S(K)=(-1)^{|E\setminus S|}
+ \det\bigl(K-I_{E\setminus S}\bigr),
+\end{equation}
+where \(I_T\) is the diagonal coordinate projection onto \(T\).  This follows
+directly from M\"obius inversion of the inclusion probabilities.
+
+Let \(\Phi(K)=(p_S(K))_S\) be the map from kernels to the probability simplex.
+At an interior kernel, differentiating entropy twice gives
+\begin{equation}\label{eq:hessian}
+ D^2H_K[A,A]
+ =-\sum_S\frac{(Dp_S(K)[A])^2}{p_S(K)}
+  -\sum_S D^2p_S(K)[A,A]\log p_S(K).
+\end{equation}
+The first sum is the pullback of the Fisher metric and is always non-positive.
+The second sum records the curvature of the probability map in the direction of
+the entropy gradient.
+
+The construction makes the first sum disappear.  If \(K\) is real symmetric
+and \(B\) is real skew-symmetric, then
+\[
+ \det(K-I_{E\setminus S}+itB)
+ =\det(K-I_{E\setminus S}-itB),
+\]
+because transposition changes \(t\) to \(-t\).  Thus every event probability is
+an even function of \(t\), and
+\begin{equation}\label{eq:vertical}
+ Dp_S(K)[iB]=0\qquad(S\subseteq E).
+\end{equation}
+If
+\[
+ b_S(K,B)=\left.\frac{d^2}{dt^2}p_S(K+itB)\right|_{t=0},
+\]
+then \eqref{eq:hessian} reduces to
+\begin{equation}\label{eq:reduced}
+ D^2H_K[iB,iB]= -\sum_S b_S(K,B)\log p_S(K).
+\end{equation}
+In information-geometric language, \(iB\) lies in the differential kernel of
+\(\Phi\); the sign is decided entirely by the vertical second-order bending of
+\(\Phi\).
+
+\section{How the four vectors were chosen}
+
+The vectors \(\one,x,q_2,q_3\) are pairwise orthogonal across the two displayed
+pairs: \(\one\perp x\), and \(q_2,q_3\perp\one,x\).  Since
+\(\|\one\|^2=5\) and \(\|x\|^2=10\), the matrix \(P\) is the orthogonal
+projection onto \(\langle\one,x\rangle\).  The two summands of \(B\) rotate,
+respectively, inside \(\mathrm{ran}(P)\) and inside \(\ker(P)\).  Hence
+\begin{equation}\label{eq:commute}
+ P^2=P=P^T,\qquad B^T=-B,\qquad PB=BP.
+\end{equation}
+It follows at once that \(K\) has eigenvalue \(1-\varepsilon\) on
+\(\mathrm{ran}(P)\) and eigenvalue \(\varepsilon\) on \(\ker(P)\).  Thus
+\(0<K<I\), while \(A=iB\) is Hermitian.
+
+Both summands of \(B\) commute with \(P\).  This commutation, rather than the
+coefficient \(-\tfrac12\), is what removes the logarithmic divergence in the
+boundary calculation below.  The limiting curvature is an indefinite quadratic
+form on the two-dimensional space spanned by these rotations.  The coefficient
+\(-\tfrac12\) is a simple rational choice inside its positive cone.
+
+\section{The positive boundary limit}
+
+For \(0<\delta<1/2\), set
+\(K_\delta=\delta I+(1-2\delta)P\).  The coordinates of \(x\) are distinct,
+so every two-row minor of the matrix with columns \(\one,x\) is nonzero.
+Consequently \(P\) represents the uniform matroid \(U_{2,5}\): every
+two-coordinate principal minor is positive.  For each subset \(S\) there is a
+positive rational number \(a_S\) such that
+\begin{equation}\label{eq:asymptotic}
+ p_S(K_\delta)=a_S\delta^{w_S}(1+O(\delta)),
+ \qquad w_S=\bigl||S|-2\bigr|.
+\end{equation}
+More explicitly,
+\[
+ a_S=\det P[S]\quad(|S|\le2),
+ \qquad
+ a_S=\det(I-P)[E\setminus S]\quad(|S|\ge2).
+\]
+These formulas follow either from the spectral Bernoulli mixture for
+\(K_\delta\), or directly from principal-minor expansion and Jacobi's
+complementary-minor identity.
+
+Let \(b_S=b_S(P,B)\).  Direct second-order determinant expansion gives the two
+exact cancellations
+\begin{equation}\label{eq:cancellations}
+ \sum_S b_S=0,
+ \qquad
+ \sum_S w_Sb_S=0.
+\end{equation}
+The first is forced by \(\sum_Sp_S=1\).  The second follows here from
+\(PB=BP\).  Equations
+\eqref{eq:reduced}--\eqref{eq:cancellations}, together with
+\(\delta\log\delta\to0\), now give
+\begin{align}
+ \lim_{\delta\downarrow0}D^2H_{K_\delta}[iB,iB]
+ &=-\sum_Sb_S\log a_S \notag\\
+ &=\frac15\log
+ \frac{2^{260}3^{143}5^{350}}{7^{87}13^{284}}
+ =0.57665861803438136898\ldots.       \label{eq:limit}
+\end{align}
+This is an exact positive number: the numerator inside the logarithm is a
+392-digit integer, whereas the denominator is a 390-digit integer.
+
+The role of the coefficient in \eqref{eq:construction} can now be seen directly.
+Let \(B_1=\one\wedge x\) and \(B_2=q_2\wedge q_3\).  Each direction separately
+has a finite, negative boundary limit:
+\[
+ \lim_{\delta\downarrow0}D^2H_{K_\delta}[iB_1,iB_1]
+ =-24.38211062\ldots,
+ \qquad
+ \lim_{\delta\downarrow0}D^2H_{K_\delta}[iB_2,iB_2]
+ =-72.60746516\ldots.
+\]
+Their mixed term makes the quadratic form indefinite, and the rational direction
+\(B_1-\tfrac12B_2\) gives the positive value in \eqref{eq:limit}.  It was chosen
+for this simple exact form, not to maximize the normalized curvature.
+
+For transparency, Table~\ref{tab:grouped} groups the 32 determinant terms by
+their value of \(a_S\).  Its second column is
+\(B_a=\sum_{S:a_S=a}b_S\); hence \(-\sum_aB_a\log a\) reproduces
+\eqref{eq:limit}.  The ungrouped table is supplied with the checker.
+
+\begin{table}[ht]
+\centering
+\small
+\caption{Grouped data for the boundary logarithmic sum.}\label{tab:grouped}
+\begin{tabular}{@{}rr@{\qquad}rr@{}}
+\toprule
+\(a\)&\(B_a\)&\(a\)&\(B_a\)\\
+\midrule
+\(1/50\)&\(72/5\)&\(2/5\)&\(-2\)\\
+\(2/25\)&\(-204/5\)&\(12/25\)&\(128/5\)\\
+\(3/25\)&\(41/5\)&\(13/25\)&\(284/5\)\\
+\(9/50\)&\(-606/5\)&\(3/5\)&\(120\)\\
+\(1/5\)&\(20\)&\(7/10\)&\(-32\)\\
+\(7/25\)&\(247/5\)&\(4/5\)&\(-36\)\\
+\(3/10\)&\(60\)&\(1\)&\(-100\)\\
+\(8/25\)&\(-112/5\)&&\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{An exact interior certificate}
+
+The positive limit proves that all sufficiently small \(\delta\) have positive
+curvature in this direction, but the scale is worth recording.  The same exact
+interval calculation gives
+\[
+ D^2H_{K_{10^{-4}}}[iB,iB]<0,
+ \qquad
+ D^2H_{K_{10^{-5}}}[iB,iB]>0.
+\]
+Their numerical values are \(-0.0710698\ldots\) and \(0.4916113\ldots\),
+respectively; the zero lies numerically near \(8.7430\times10^{-5}\).  This
+numerical location is not used in the proof.  We fix \(\varepsilon=10^{-6}\)
+and verify both the positive Hessian and a finite midpoint violation using
+rational arithmetic throughout.
+
+For a positive rational \(r\in[1,2]\), set \(y=(r-1)/(r+1)\).  The positive
+series for \(2\,\mathrm{atanh}(y)\) gives, for every positive integer \(m\),
+\begin{equation}\label{eq:logbound}
+ 2\sum_{j=0}^{m-1}\frac{y^{2j+1}}{2j+1}
+ \le \log r\le
+ 2\sum_{j=0}^{m-1}\frac{y^{2j+1}}{2j+1}
+ +\frac{2y^{2m+1}}{(2m+1)(1-y^2)}.
+\end{equation}
+Every positive rational probability is written as \(2^kr\) with
+\(1\le r<2\).  Taking \(m=24\) in \eqref{eq:logbound} gives directed rational
+intervals for all logarithms in \eqref{eq:reduced}.
+
+The event probabilities and second derivatives are also rational.  They are
+computed by expanding each five-by-five determinant over its 120 permutations
+and extracting the coefficients of \(t^0\) and \(t^2\).  Summation checks
+\[
+ p_S(K)>0\quad\hbox{for all }S,
+ \qquad \sum_Sp_S(K)=1,
+ \qquad \sum_Sb_S(K,B)=0.
+\]
+Applying the lower logarithm endpoint to positive coefficients and the upper
+endpoint to negative coefficients, with the choices reversed for the upper
+bound, proves
+\begin{equation}\label{eq:exactinterval}
+ 0.5661274627785100258893
+ <D^2H_K[iB,iB]<
+ 0.5661274627785100258923.
+\end{equation}
+The endpoints in the computation are exact fractions; the decimals in
+\eqref{eq:exactinterval} are shortened outward displays.  In particular,
+\(\tfrac12<D^2H_K[iB,iB]<\tfrac35\).
+
+For the finite chord, direct calculation gives \(\|B\|_F^2=170\).  Since
+\(\lambda_{\min}(K)=\lambda_{\min}(I-K)=10^{-6}\),
+\[
+ t\|B\|_{\rm op}\le t\|B\|_F<14\times10^{-9}<10^{-6}.
+\]
+Thus \(Q_\pm\) are strict positive contractions.  The evenness in
+\eqref{eq:vertical} holds for the full determinant polynomial, so
+\(p_S(Q_+)=p_S(Q_-)\) exactly.  Applying \eqref{eq:logbound} directly to the
+center and endpoint distributions gives the directed rational enclosure
+\[
+ 2.81518\times10^{-19}<H(Q_+)-H(K)<2.81520\times10^{-19}.
+\]
+This proves Theorem~\ref{thm:main} in its midpoint form.
+
+The accompanying file \texttt{verify\_exact.py} is self-contained and uses only
+the Python standard library.  Starting from the four vectors, it rebuilds all 32
+boundary terms, the prime-factor expression in \eqref{eq:limit}, the interior
+Hessian bounds, both endpoint distributions, and the finite entropy gap.  It
+also gives an exact rational certificate for the real symmetric Hessian block
+described below.  Its
+SHA-256 digest is
+\begin{center}
+\small\texttt{FBEA3920226D096A9490DE89EFFD6A8BA39C5AC68EDCA9DE251E445E5520148C}.
+\end{center}
+
+\section{Scope}
+
+The midpoint \(K\) is real symmetric, but the direction \(A=iB\) is purely
+imaginary.  Complex conjugation fixes real symmetric directions and negates
+purely imaginary Hermitian directions.  Since \(H(\overline L)=H(L)\), the two
+subspaces are orthogonal for the Hessian at a real kernel.  The counterexample
+lies entirely in the imaginary block.
+
+At the particular midpoint \(K\) above, the Hessian is negative definite on the
+entire real symmetric block.  The checker proves this by an invertible rational
+change of basis after which the negative Hessian is strictly diagonally
+dominant.  Thus the real restriction was tested at this kernel, although this
+one local calculation does not settle it in general.
+
+The result therefore disproves Conjecture~2.6 with the real-or-complex
+quantifier used in the cited sources.  It does not decide the separate question
+obtained by requiring all kernels and directions to be real symmetric, and it
+does not establish that five is the smallest possible dimension.
+
+We make no absolute priority claim.  To the best of our knowledge, the cited
+conjecture had no previously published proof or counterexample; private
+communications, seminars, unpublished notes, and unsuccessful attempts are
+outside the scope of our search.
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}

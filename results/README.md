@@ -1,23 +1,9 @@
 # Result index
 
-Published results: **0**.
+Published results: **1**.
 
-`index.jsonl` contains no entries. Do not add placeholder research claims to the index.
+| ID | Result | Scope | Artifacts |
+|---|---|---|---|
+| I05 | [Exact five-dimensional counterexample to Lyons's Conjecture 2.6](I05_lyons_counterexample/README.md) | Original finite-dimensional complex-Hilbert-space conjecture | [paper](I05_lyons_counterexample/main.pdf), [latest four-page review note](I05_lyons_counterexample/author_review_note_v2/README.md), [analytic six-point reduction](I05_lyons_counterexample/analytic_reduction/README.md), [history (Chinese)](I05_lyons_counterexample/history_zh.md), [original-source PDFs](I05_lyons_counterexample/sources/README.md), [exact certificates](I05_lyons_counterexample/certificates/), [verification summary](I05_lyons_counterexample/verification_summary.md) |
 
-For a future specifically authorized release, use one entry per independently verified result:
-
-```json
-{
-  "result_id": "<public-result-id>",
-  "title": "<precise-result-title>",
-  "source_entry_id": "<original-source-entry-id>",
-  "statement_scope": "<exact-proved-or-disproved-statement>",
-  "source_references": ["<verified-public-source-link>"],
-  "artifact_path": "<public-release-directory>",
-  "verification_path": "<public-verification-summary>",
-  "release_version": "<public-git-commit-or-tag>",
-  "released_on": "<YYYY-MM-DD>"
-}
-```
-
-This template is not a result or release authorization. Public verification summaries must be prepared for the authorized package and must not expose private repository locations, unpublished candidate lists, or private research history.
+The machine-readable index is [`index.jsonl`](index.jsonl). Each entry identifies the exact statement settled by the corresponding public package.

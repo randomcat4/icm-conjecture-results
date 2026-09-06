@@ -1,0 +1,279 @@
+\documentclass[UTF8,11pt,a4paper]{ctexart}
+\usepackage[a4paper,margin=25mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,booktabs,microtype}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{定理}
+\newtheorem{lemma}{引理}
+
+\title{行列式概率测度熵非凹性的一个六点对称反例}
+\author{RenZhenzhuo\\\small 谨代表欧拉智能体团队}
+\date{审阅稿，2026 年 9 月 6 日}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Lyons 曾问：有限行列式概率测度的 Shannon 熵是否是其正压缩核的凹函数。
+本文给出一个定义在六个标号点上的反例。反例的中点是由秩三投影向内部
+移动所得的实对称矩阵；两个端点则是在中点上加入一对符号相反的纯虚
+Hermitian 扰动。借助对称性，64 个完备事件的概率可归为八类。一个简短的
+严格计算表明，两个端点给出相同的概率分布，而它们的熵严格大于中点处的熵。
+\end{abstract}
+
+\section{反例}
+
+令 $E=[6]$。对满足 $0\preceq L\preceq I$ 的 Hermitian 矩阵 $L$，
+记 $X_L$ 为满足
+\[
+ \Pr(T\subseteq X_L)=\det L[T]\qquad(T\subseteq E)
+\]
+的行列式点过程，并记
+\[
+ p_A(L)=\Pr(X_L=A),\qquad
+ H(L)=-\sum_{A\subseteq E}p_A(L)\log p_A(L).
+\]
+Lyons 在 2003 年提出了 $H$ 关于 $L$ 的凹性猜想~\cite{Lyons2003DPM}，
+并在其 ICM 综述的猜想 2.6 中再次陈述~\cite{Lyons2014}。
+
+\begin{theorem}\label{thm:main-zh}
+存在严格正压缩算子 $Q_+$ 和 $Q_-$，其共同中点 $K$ 满足
+\[
+ p_A(Q_+)=p_A(Q_-)\qquad(A\subseteq E)
+\]
+以及
+\begin{equation}\label{eq:gap-zh}
+ \frac1{40\,000\,000}
+ <H(Q_+)-H(K)
+ <\frac1{39\,000\,000}.
+\end{equation}
+因而
+\[
+ H(K)<\frac{H(Q_-)+H(Q_+)}2.
+\]
+所以，行列式熵在复 Hermitian 正压缩算子集合上不是凹函数。
+\end{theorem}
+
+下面写出这些矩阵。令
+\[
+ R=\frac13
+ \begin{pmatrix}
+  2&-1& 2\\
+ -1& 2& 2\\
+  2& 2&-1
+ \end{pmatrix},
+ \qquad
+ S=\begin{pmatrix}
+ 0&1&-1\\
+ -1&0&1\\
+ 1&-1&0
+ \end{pmatrix},
+\]
+并定义
+\begin{equation}\label{eq:PB-zh}
+ P=\frac12\begin{pmatrix}I_3&R\\ R&I_3\end{pmatrix},
+ \qquad
+ B=\begin{pmatrix}S&0\\0&-S\end{pmatrix}.
+\end{equation}
+最后取
+\begin{equation}\label{eq:kernels-zh}
+ \varepsilon=\frac1{475},\qquad
+ t=\frac1{2300},\qquad
+ K=\varepsilon I_6+(1-2\varepsilon)P,
+ \qquad Q_\pm=K\pm itB.
+\end{equation}
+数值上，
+\[
+ H(K)=2.877726131217012\ldots,\qquad
+ H(Q_+)=2.877726156388836\ldots.
+\]
+熵的增加量为
+$2.517182345129681\ldots\times10^{-8}$，约为中点熵的
+$8.75\times10^{-9}$。
+
+\section{矩阵结构与端点分布}
+
+\begin{lemma}\label{lem:structure-zh}
+式 \eqref{eq:PB-zh} 中的矩阵满足
+\[
+ R^T=R,\qquad R^2=I_3,\qquad
+ S^T=-S,\qquad RS=-SR.
+\]
+所以 $P$ 是秩三正交投影，$B^T=-B$，$PB=BP$，并且
+$\lVert iB\rVert=\sqrt3$。
+\end{lemma}
+
+\begin{proof}
+前四个等式由直接相乘得到。分块相乘随即给出
+$P^T=P=P^2$、$B^T=-B$ 和 $PB=BP$。矩阵 $iS$ 的特征多项式为
+$\lambda(\lambda^2-3)$，因此 $\lVert iB\rVert=\sqrt3$。
+\end{proof}
+
+$K$ 的特征值为 $\varepsilon$ 和 $1-\varepsilon$，重数均为三。由于
+\[
+ t\lVert iB\rVert=t\sqrt3<\varepsilon,
+\]
+特征值扰动界说明 $Q_\pm$ 的每个特征值都严格位于 $(0,1)$ 内。因此
+$Q_\pm$ 都是严格正压缩算子。
+
+下文使用完备事件公式
+\begin{equation}\label{eq:event-zh}
+ p_A(L)=(-1)^{|E\setminus A|}
+ \det\bigl(L-I_{E\setminus A}\bigr),
+\end{equation}
+其中 $I_C$ 表示到坐标集 $C$ 上的对角投影。该式直接来自对包含事件概率
+作容斥反演。
+
+由于 $Q_-=\overline{Q_+}$，式 \eqref{eq:event-zh} 中相应的两个行列式
+互为复共轭；而这两个矩阵都是 Hermitian 矩阵，故其行列式为实数。因此
+\begin{equation}\label{eq:same-law-zh}
+ p_A(Q_+)=p_A(Q_-)\qquad(A\subseteq E).
+\end{equation}
+端点分布相等这一点不需要任何数值计算。
+
+\section{严格的熵比较}
+
+令
+\[
+ u=\varepsilon(1-\varepsilon).
+\]
+保持 $P$ 不变并把 $B$ 送到 $B$ 或 $-B$ 的坐标置换，再加上取补集，
+把 64 个子集分成下表中的八类。例如，坐标对称由
+$(1\,2\,3)(4\,6\,5)$、$(2\,3)(4\,6)$ 和
+$(1\,4)(2\,5)(3\,6)$ 生成。以
+$\mathrm{diag}(I_3,-I_3)$ 作共轭会把 $Q_-$ 送到 $I-Q_+$；
+结合 DPP 的补集规则和 \eqref{eq:same-law-zh}，一个子集与其补集具有
+相同的中点和端点概率。将各类代表代入 \eqref{eq:event-zh}，得到表中
+后两列。
+
+先完整推导第一行。$K$ 的特征值 $\varepsilon$ 和 $1-\varepsilon$
+各出现三次，所以
+\[
+ p_{\varnothing}(K)=\det(I-K)
+ =\varepsilon^3(1-\varepsilon)^3=u^3.
+\]
+由 $PB=BP$，$P$ 的像空间和核空间在 $iB$ 下均保持不变。在
+$x\mapsto(x,Rx)$ 与 $x\mapsto(x,-Rx)$ 的识别下，$iB$ 在这两个
+三维子空间上的限制都由 $iS$ 表示，其特征值为
+$0,\sqrt3,-\sqrt3$。因此
+\begin{align*}
+ p_{\varnothing}(Q_+)
+ &=\det(I-Q_+)\\
+ &=\varepsilon(1-\varepsilon)
+   (\varepsilon^2-3t^2)((1-\varepsilon)^2-3t^2)\\
+ &=u^3+3t^2u(3t^2+2u-1).
+\end{align*}
+这正是表中第一行。其余七行使用同一个行列式公式得到；随附检查器会逐一
+核对所有代表及其重数。
+
+\begin{center}
+\setlength{\tabcolsep}{3.5pt}
+\renewcommand{\arraystretch}{1.25}
+\scriptsize
+\begin{tabular}{@{}ccll@{}}
+\toprule
+代表 $A$&重数&$p_A(K)$&$p_A(Q_+)-p_A(K)$\\
+\midrule
+\(\varnothing\)&2
+ &\(u^3\)
+ &\(3t^2u(3t^2+2u-1)\)\\
+\(\{1\}\)&12
+ &\(u^2(1-2u)/2\)
+ &\(-t^2(18t^2u-3t^2+12u^2-6u+1)/2\)\\
+\(\{1,2\}\)&12
+ &\(u(1-2u)^2/4\)
+ &\(t^2(18t^2u-6t^2+12u^2-8u+1)/2\)\\
+\(\{1,2,3\}\)&2
+ &\((1-2u)^3/8\)
+ &\(3t^2(1-2u)(3t^2+2u-1)/2\)\\
+\(\{1,4\}\)&12
+ &\(u(36u^2-20u+5)/36\)
+ &\(t^2(54t^2u-12t^2+36u^2-10u+1)/6\)\\
+\(\{2,4\}\)&6
+ &\(u(9u^2-8u+2)/9\)
+ &\(t^2(27t^2u-6t^2+18u^2-11u+2)/3\)\\
+\(\{1,2,4\}\)&12
+ &\((1-2u)(9u^2-4u+1)/18\)
+ &\(-t^2(54t^2u-15t^2+36u^2-20u+2)/6\)\\
+\(\{1,3,4\}\)&6
+ &\((1-2u)(36u^2-4u+1)/72\)
+ &\(-t^2(54t^2u-15t^2+36u^2-8u-1)/6\)\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+下面说明如何在不依赖浮点数的情况下严格判定符号。将任意正有理数写成
+$x=2^kr$，其中 $1\le r<2$，再令 $y=(r-1)/(r+1)$。对每个正整数
+$m$ 都有
+\begin{equation}\label{eq:log-bound-zh}
+ 2\sum_{j=0}^{m-1}\frac{y^{2j+1}}{2j+1}
+ \le \log r\le
+ 2\sum_{j=0}^{m-1}\frac{y^{2j+1}}{2j+1}
+ +\frac{2y^{2m+1}}{(2m+1)(1-y^2)}.
+\end{equation}
+在 $r=2$ 处应用同一个公式，可得到 $\log2$ 的有理上下界。因此
+\eqref{eq:log-bound-zh} 为表中每个概率的对数给出定向有理界。
+
+若某行的重数为 $m$，中点概率为 $p$，端点改变量为 $d$，则该行对熵差
+的贡献是 $m[-(p+d)\log(p+d)+p\log p]$。代入
+$\varepsilon=1/475$ 和 $t=1/2300$，将八行相加，并在
+\eqref{eq:log-bound-zh} 中取 50 项，纯有理数运算给出
+\[
+ \frac1{40\,000\,000}
+ <H(Q_+)-H(K)
+ <\frac1{39\,000\,000}.
+\]
+这就证明了 \eqref{eq:gap-zh}，并由 \eqref{eq:same-law-zh} 完成
+定理 \ref{thm:main-zh} 的证明。
+
+随附的 \texttt{verify\_exact.py} 只使用 Python 标准库，从上述四个
+矩阵出发，重建全部事件概率、八类分组、端点合法性、端点分布相等性以及
+熵差的两个定向有理界。
+
+\section{为什么这个方向有效}
+
+上述计算还有一个直接的概念解释。若 $L$ 是实对称矩阵，$B$ 是实
+反对称矩阵，则对 \eqref{eq:event-zh} 中的行列式作转置可得
+\[
+ p_A(L+isB)=p_A(L-isB).
+\]
+每个完备事件概率都是 $s$ 的偶函数，故它在 $s=0$ 处的一阶导数为零。
+对熵求两次导数便得到
+\begin{equation}\label{eq:second-derivative-zh}
+ \left.\frac{d^2}{ds^2}H(L+isB)\right|_{s=0}
+ =-\sum_{A\subseteq E}
+ \left.\frac{d^2}{ds^2}p_A(L+isB)\right|_{s=0}\log p_A(L).
+\end{equation}
+通常为负、由一阶导数平方组成的项在这里消失了。因此，符号完全由事件
+概率的二阶运动决定。用信息几何的语言说，这就是概率映射的第二基本形式
+与熵梯度的配对。
+
+这里的矩阵属于一个简单的代数族：只要 $R$ 是满足 $R^T=R$、
+$R^2=I$ 的实矩阵，而 $S$ 是满足 $S^T=-S$、$RS=-SR$ 的实矩阵，
+分块公式
+\[
+ P=\frac12\begin{pmatrix}I&R\\R&I\end{pmatrix},
+ \qquad
+ B=\begin{pmatrix}S&0\\0&-S\end{pmatrix}
+\]
+就自动给出正交投影 $P$ 以及与之可交换的反对称方向 $B$。上面的具体
+有理矩阵取自这个族；选取它们，是因为相应事件概率只有八类，并且二阶
+运动会提高熵。
+
+这个族来自对正压缩算子集合边界附近一阶退化方向的搜索。该搜索解释了
+构造的来源，却不是验证反例所必需的。给定 $R$ 和 $S$ 以后，证明只剩
+引理 \ref{lem:structure-zh} 中的矩阵恒等式、完备事件公式
+\eqref{eq:event-zh} 和八行熵计算。
+
+本例的中点是实对称矩阵，方向 $iB$ 则是纯虚 Hermitian 矩阵。因此，
+本例否定的是允许复 Hermitian 核的猜想；它不解决仅允许实对称核时的
+独立问题，也不证明六是反例可能出现的最小维数。
+
+本构造是在 Qwen Euler 智能体协助下找到的。数值搜索只用于定位结构；
+一旦给定 $R$ 和 $S$，本文及检查器中的全部结论都由严格计算验证。
+尽我们所知，该猜想此前没有公开发表的证明或反例。
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}

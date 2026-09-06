@@ -1,0 +1,41 @@
+{
+  "h": "1/100000",
+  "leading_principal_minors_K_plus_hA": [
+    "2719/10000",
+    "995839749991/25000000000000",
+    "123460921839/5000000000000000",
+    "4883537625128308081/625000000000000000000000000",
+    "7353066474454085031/6250000000000000000000000000000"
+  ],
+  "leading_principal_minors_K_plus_hA_imag": [
+    "0/1",
+    "0/1",
+    "0/1",
+    "0/1",
+    "0/1"
+  ],
+  "leading_principal_minors_I_minus_K_minus_hA": [
+    "7281/10000",
+    "4598339749991/25000000000000",
+    "296560989039361/5000000000000000",
+    "43818177021217628308081/625000000000000000000000000",
+    "106676909868459401834969/6250000000000000000000000000000"
+  ],
+  "leading_principal_minors_I_minus_K_minus_hA_imag": [
+    "0/1",
+    "0/1",
+    "0/1",
+    "0/1",
+    "0/1"
+  ],
+  "K_plus_hA_positive_definite": true,
+  "I_minus_K_minus_hA_positive_definite": true,
+  "p_plus_equals_p_minus": true,
+  "all_endpoint_event_probabilities_positive": true,
+  "sum_endpoint_probabilities": "1/1",
+  "entropy_gap_lower_decimal": "2.33555253804221762984753943985197679425911147287861843909617E-13",
+  "entropy_gap_upper_decimal": "2.33555253804221762984753943985197679425911147287861843909617E-13",
+  "certified_gap_lower_bound": "1/10000000000000",
+  "simple_lower_bound_check": true,
+  "strict_midpoint_concavity_violation": true
+}

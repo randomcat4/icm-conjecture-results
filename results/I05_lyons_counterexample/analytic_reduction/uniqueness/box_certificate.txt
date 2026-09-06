@@ -1,0 +1,43 @@
+PROVED_LOCAL
+precision_bits: 256
+box_radius: 2^-30 = 9.313225746154785156250000000000000000000000000000000000000000000000000000000e-10
+box_c: [0.98497067 +/- 2.35e-9]
+box_c_lower: [0.984970667652927635559813972789 +/- 2.08e-31]
+box_c_upper: [0.984970669515572788260217955993 +/- 1.79e-31]
+krawczyk_c: [0.9849706686 +/- 7.74e-11]
+box_d: [0.99397451 +/- 4.17e-9]
+box_d_lower: [0.993974512304495837753069974469 +/- 3.83e-31]
+box_d_upper: [0.993974514167140990453473957673 +/- 3.13e-33]
+krawczyk_d: [0.9939745132 +/- 6.17e-11]
+box_s: [0.00111472 +/- 2.13e-9]
+box_s_lower: [0.00111472026312249233882886034265 +/- 1.62e-33]
+box_s_upper: [0.00111472212576764503923284354626 +/- 2.58e-33]
+krawczyk_s: [0.00111472119 +/- 7.03e-12]
+min_probability_enclosure_lower: [3.96454002097255734702803652654e-8 +/- 2.35e-39]
+feasibility_margin: [0.00216398 +/- 4.89e-9]
+preconditioner_determinant: [-3687.59715022815682441195385792 +/- 9.81e-28]
+minus_hessian_minor_1: [0.0074 +/- 7.08e-5]
+minus_hessian_minor_2: [0.00025 +/- 6.57e-6]
+minus_hessian_minor_3: [0.0003 +/- 3.72e-5]
+gap_on_box: [+/- 4.17e-7]
+gap_on_box_lower: [1.32578081394022676282203913705e-7 +/- 3.66e-37]
+gap_on_box_upper: [4.16869627698183323478317045646e-7 +/- 2.71e-37]
+proved: exactly one stationary point lies in the box
+proved: Hessian is negative definite throughout the box
+proved: that stationary point is the unique maximizer on the box
+initial_parent_minors [+/- 0.0378] [+/- 8.21e-3] [+/- 0.0177]
+PROVED_BOX
+terminal_subboxes_checked: 128
+adaptive_splits: 127
+maximum_axis_subdivision_level: 3
+parent_box_c: [0.985 +/- 1.52e-4]
+parent_box_d: [0.9940 +/- 8.66e-5]
+parent_box_s: [0.0011 +/- 3.00e-5]
+worst_probability_lower_bound: [3.7114034457701202127e-8 +/- 1.01e-28]
+worst_minus_hessian_minor_1_lower_bound: [0.0062962860461225436087 +/- 3.89e-23]
+worst_minus_hessian_minor_2_lower_bound: [0.00011386894836487716165 +/- 4.43e-24]
+worst_minus_hessian_minor_3_lower_bound: [1.2796621032269806558e-5 +/- 1.34e-25]
+proved: Hessian is negative definite throughout the parent box
+proved: the Krawczyk root is the unique stationary point in the parent box
+proved: the Krawczyk root is the unique global maximizer on the parent box
+not proved: exclusion of larger values outside the parent box
