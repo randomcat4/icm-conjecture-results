@@ -20,6 +20,11 @@ For initial review by the conjecture's author, the
 around the information-geometric mechanism, together with its own dependency-free exact checker
 and a brief email draft.
 
+The [larger-gap package](larger_gap/README.md) gives two further exact finite chords: an optimized
+five-point example with gap greater than `1/130000000`, and a symmetric six-point example with
+gap greater than `1/40000000`.  The latter has a short block construction and only eight distinct
+center/endpoint probability pairs.
+
 ## Reproduce the exact check
 
 Only Python's standard library is required. From this directory, run:
@@ -70,3 +75,5 @@ No license or DOI is asserted by this package.
   \(\Lambda_P(D)\) and \(\ell(P,N,B)\).
 - [`author_review_note/`](author_review_note/): five-page human-readable note, exact checker,
   boundary data, and an unsent email draft.
+- [`larger_gap/`](larger_gap/): independently verified five-point and symmetric six-point
+  counterexamples with substantially larger finite entropy gaps.
