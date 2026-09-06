@@ -20,10 +20,20 @@ For initial review by the conjecture's author, the
 around the information-geometric mechanism, together with its own dependency-free exact checker
 and a brief email draft.
 
+The revised [four-page author-review note](author_review_note_v2/README.md) gives the latest
+human-readable version in English and Chinese, with both LaTeX sources, compiled PDFs, and a
+dependency-free exact checker.
+
 The [larger-gap package](larger_gap/README.md) gives two further exact finite chords: an optimized
 five-point example with gap greater than `1/130000000`, and a symmetric six-point example with
 gap greater than `1/40000000`.  The latter has a short block construction and only eight distinct
 center/endpoint probability pairs.
+
+The [analytic six-point reduction](analytic_reduction/README.md) explains the later
+three-parameter family.  It derives the eight probability orbits and stationary equations,
+proves a boundary asymptotic mechanism, rigorously isolates the observed stationary point on an
+explicit box, and supplies a denominator-\(10^4\) rational example with gap greater than
+`1/3700000`.
 
 ## Reproduce the exact check
 
@@ -75,5 +85,10 @@ No license or DOI is asserted by this package.
   \(\Lambda_P(D)\) and \(\ell(P,N,B)\).
 - [`author_review_note/`](author_review_note/): five-page human-readable note, exact checker,
   boundary data, and an unsent email draft.
+- [`author_review_note_v2/`](author_review_note_v2/): latest four-page English and Chinese notes,
+  LaTeX sources, PDFs, and exact checker.
 - [`larger_gap/`](larger_gap/): independently verified five-point and symmetric six-point
   counterexamples with substantially larger finite entropy gaps.
+- [`analytic_reduction/`](analytic_reduction/): exact eight-class reduction, boundary
+  asymptotics, interval uniqueness certificate on an explicit box, and the larger rational
+  six-point candidate.

@@ -1,0 +1,14 @@
+main.aux
+main.bbl
+main.blg
+main.log
+main.out
+main.synctex.gz
+main_zh.aux
+main_zh.bbl
+main_zh.blg
+main_zh.log
+main_zh.out
+main_zh.synctex.gz
+tmp/
+__pycache__/

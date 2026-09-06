@@ -19,6 +19,8 @@ This repository gives an exact five-dimensional counterexample to the conjecture
 
 - [Proof PDF](results/I05_lyons_counterexample/main.pdf)
 - [Five-page author-review note and exact checker](results/I05_lyons_counterexample/author_review_note/README.md)
+- [Latest four-page author-review note in English and Chinese](results/I05_lyons_counterexample/author_review_note_v2/README.md)
+- [Analytic six-point reduction, larger rational gap, and interval certificate](results/I05_lyons_counterexample/analytic_reduction/README.md)
 - [Result overview and reproduction instructions](results/I05_lyons_counterexample/README.md)
 - [Independent verification summary](results/I05_lyons_counterexample/verification_summary.md)
 - [中文：问题的提出、发展、作者与本项目贡献](results/I05_lyons_counterexample/history_zh.md)
